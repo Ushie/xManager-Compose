@@ -8,13 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.ushiekane.xmanager.util.deleteCache
 
 @Composable
 fun ToolsCard(
 ) {
+    val context = LocalContext.current
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,7 +48,7 @@ fun ToolsCard(
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(modifier = Modifier.size(28.dp), imageVector = Icons.Default.Settings, contentDescription = null)
                 }
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = { context.deleteCache() }) {
                     Icon(modifier = Modifier.size(28.dp), imageVector = Icons.Default.Refresh, contentDescription = null)
                 }
                 IconButton(onClick = { /*TODO*/ }) {

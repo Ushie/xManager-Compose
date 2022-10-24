@@ -1,5 +1,7 @@
 package dev.ushiekane.xmanager.api
 
+import android.os.Environment
+import android.webkit.URLUtil
 import com.vk.knet.core.Knet
 import com.vk.knet.core.http.HttpMethod
 import com.vk.knet.core.http.HttpRequest
@@ -11,7 +13,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.io.File
 
-class API(cronet: CronetKnetEngine, val json: Json) {
+class API(cronet: CronetKnetEngine, private val json: Json) {
 
     private val client = Knet.Build(cronet)
 
@@ -30,20 +32,20 @@ class API(cronet: CronetKnetEngine, val json: Json) {
         json.decodeFromString(stream) as Release
     }
 
-    suspend fun download(workdir: File, url: String): File {
-        val out = workdir.resolve("download.apk")
-        if (out.exists()) {
-            return out
-        }
+    suspend fun download(url: String): File {
         val file = withContext(Dispatchers.IO) {
             client.execute(
                 HttpRequest(
                     HttpMethod.GET,
                     url
                 )
-            ).body!!.asBytes()
+            )
         }
-        out.writeBytes(file)
+        val out = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).resolve(URLUtil.guessFileName(file.url, null, null))
+        if (out.exists()) {
+            return out
+        }
+        out.writeBytes(file.body!!.asBytes())
         return out
     }
 

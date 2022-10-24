@@ -55,14 +55,14 @@ fun HomeScreen(
                 expandedContent = {
                     if (uwu) {
                         LazyColumn {
-                            viewModel.normalReleasesList.forEach { it ->
+                            viewModel.normalReleasesList.forEach {
                                 item { Release(it.name, it.downloadUrl, false) }
                             }
                         }
                     }
                     else {
                         LazyColumn {
-                            viewModel.normalClonedReleasesList.forEach { it ->
+                            viewModel.normalClonedReleasesList.forEach {
                                 item { Release(it.name, it.downloadUrl, false) }
                             }
                         }
@@ -92,7 +92,7 @@ fun HomeScreen(
             )
             InfoCard {
                 LazyColumn {
-                    viewModel.changeLog.forEach() {
+                    viewModel.changeLog.forEach {
                         item {
                             Text(
                                 text = it.changelog,
