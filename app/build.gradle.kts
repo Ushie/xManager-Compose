@@ -1,8 +1,8 @@
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("plugin.serialization") version "1.7.20"
+    id("kotlin-parcelize")
 }
 
 android {
@@ -42,7 +42,6 @@ android {
 }
 
 dependencies {
-
     // AndroidX core
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.core:core-splashscreen:1.0.0")
@@ -54,6 +53,13 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.0.0-rc01")
     implementation("androidx.compose.material:material-icons-extended:${composeVersion}")
 
+    // Accompanist
+    val accompanistVersion = "0.26.0-alpha"
+    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
+
+    // Taxi (navigation)
+    implementation("com.github.X1nto:Taxi:1.2.0")
+
     // Koin
     val koinVersion = "3.2.2"
     implementation("io.insert-koin:koin-android:$koinVersion")
@@ -62,11 +68,13 @@ dependencies {
     // KotlinX
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
 
-    // Taxi (navigation)
-    implementation("com.github.X1nto:Taxi:1.2.0")
-
     // Networking
     implementation("com.vk.knet:core:1.0")
     implementation("com.vk.knet:cronet:1.0")
     implementation("com.vk.knet:okcronet:1.0")
+    implementation("androidx.appcompat:appcompat:1.5.1")
+    debugImplementation("androidx.compose.ui:ui-tooling:${composeVersion}")
+    implementation("androidx.compose.material3:material3:1.0.0-rc01")
+    implementation("androidx.compose.material:material-icons-extended:${composeVersion}")
+    implementation("androidx.core:core-splashscreen:1.0.0")
 }

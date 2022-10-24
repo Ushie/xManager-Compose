@@ -10,3 +10,8 @@ fun Context.install(url: String) {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK
     })
 }
+fun Context.openUrl(url: String) {
+    startActivity(Intent(Intent.ACTION_VIEW, url.toUri()).apply {
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+    })
+}

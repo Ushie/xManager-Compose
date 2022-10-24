@@ -1,17 +1,2 @@
-pluginManagement {
-    repositories {
-        mavenCentral()
-        maven("https://jitpack.io")
-        google()
-        mavenCentral()
-    }
-}
-dependencyResolutionManagement {
-    repositories {
-        google()
-        maven("https://jitpack.io")
-        mavenCentral()
-    }
-}
-rootProject.name = "XManager"
+rootProject.name = "xManager Compose"
 include(":app")

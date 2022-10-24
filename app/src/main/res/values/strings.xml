@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">xManager Compose</string>
+    <string name="home">xManager</string>
 </resources>

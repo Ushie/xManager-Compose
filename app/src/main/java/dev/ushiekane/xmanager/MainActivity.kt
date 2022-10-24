@@ -2,26 +2,49 @@ package dev.ushiekane.xmanager
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.with
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import dev.ushiekane.xmanager.ui.theme.XManagerComposeTheme
+import androidx.compose.ui.graphics.Color
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.xinto.taxi.Taxi
+import com.xinto.taxi.rememberBackstackNavigator
+import dev.ushiekane.xmanager.ui.navigation.AppDestination
+import dev.ushiekane.xmanager.ui.screen.HomeScreen
+import dev.ushiekane.xmanager.ui.theme.XManagerTheme
+import dev.ushiekane.xmanager.ui.viewmodel.HomeViewModel
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        installSplashScreen()
+
         super.onCreate(savedInstanceState)
         setContent {
-            XManagerComposeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
+            XManagerTheme {
+                val navigator = rememberBackstackNavigator<AppDestination>(AppDestination.Home)
+
+                BackHandler {
+                    navigator.pop()
+                }
+
+                Taxi(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
+                    navigator = navigator,
+                    transitionSpec = { fadeIn() with fadeOut() }
+                ) { destination ->
+                    when (destination) {
+                        is AppDestination.Home -> HomeScreen(
+                            onClickSettings = { /* TODO */ }
+                        )
+                    }
                 }
             }
         }

@@ -1,17 +1,25 @@
 buildscript {
-    extra.apply {
-        set("compose_version", "1.3.0-rc02")
-    }
     repositories {
         google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:7.4.0-beta02")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle.kts files
     }
 }
 
-plugins {
-    id("com.android.application") version "7.4.0-beta02" apply false
-    id("com.android.library") version "7.4.0-beta02" apply false
-    id("org.jetbrains.kotlin.android") version "1.7.20" apply false
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven(url = "https://jitpack.io")
+    }
 }
-repositories {
-    google()
+
+tasks.register<Delete>("clean") {
+    delete(rootProject.buildDir)
 }
