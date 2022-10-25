@@ -1,5 +1,6 @@
 package dev.ushiekane.xmanager.ui.component
 
+import android.os.Build
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -43,7 +44,7 @@ fun InfoCard(
                     )
                     Spacer(Modifier.weight(1f))
                     Text(
-                        text = "ARM64-V8A",
+                        text = Build.SUPPORTED_ABIS.first().uppercase() ,
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.sp
                     )
