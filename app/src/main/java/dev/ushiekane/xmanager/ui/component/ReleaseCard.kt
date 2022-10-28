@@ -65,7 +65,7 @@ fun ReleaseCard(
                     )
                     Spacer(Modifier.weight(1f))
                     Text(
-                        text = latest.toString(),
+                        text = latest,
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.sp
                     )
