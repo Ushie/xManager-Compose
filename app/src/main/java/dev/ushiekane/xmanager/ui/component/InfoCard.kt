@@ -1,6 +1,7 @@
 package dev.ushiekane.xmanager.ui.component
 
 import android.os.Build
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -92,7 +93,7 @@ fun InfoCard(
                     )
                 }
             }
-            if (expandedState) {
+            AnimatedVisibility(visible = expandedState) {
                 Box(
                     modifier = Modifier
                         .padding(12.dp, 0.dp, 12.dp, 12.dp)
