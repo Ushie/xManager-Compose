@@ -46,11 +46,11 @@ dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.core:core-splashscreen:1.0.0")
 
-    implementation("androidx.activity:activity-compose:1.7.0-alpha01")
+    implementation("androidx.activity:activity-compose:1.7.0-alpha02")
 
     val composeVersion = "1.3.0-alpha03"
     implementation("androidx.compose.ui:ui:${composeVersion}")
-    implementation("androidx.compose.material3:material3:1.0.0-rc01")
+    implementation("androidx.compose.material3:material3:1.1.0-alpha01")
     implementation("androidx.compose.material:material-icons-extended:${composeVersion}")
 
     // Accompanist
@@ -74,7 +74,7 @@ dependencies {
     implementation("com.vk.knet:okcronet:1.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
     debugImplementation("androidx.compose.ui:ui-tooling:${composeVersion}")
-    implementation("androidx.compose.material3:material3:1.0.0-rc01")
+    implementation("androidx.compose.material3:material3:1.1.0-alpha01")
     implementation("androidx.compose.material:material-icons-extended:${composeVersion}")
     implementation("androidx.core:core-splashscreen:1.0.0")
 }

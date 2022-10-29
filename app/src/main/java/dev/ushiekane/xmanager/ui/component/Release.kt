@@ -1,7 +1,6 @@
 package dev.ushiekane.xmanager.ui.component
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
@@ -18,7 +17,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.ushiekane.xmanager.R
-import dev.ushiekane.xmanager.api.API
 import dev.ushiekane.xmanager.ui.viewmodel.HomeViewModel
 import org.koin.androidx.compose.getViewModel
 
@@ -39,7 +37,6 @@ fun Release(
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-
         if (isAmoled) {
             Icon(
                 modifier = Modifier.size(16.dp),

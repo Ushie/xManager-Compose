@@ -42,7 +42,7 @@ fun ReleaseCard(
                 ) {
                     Text(
                         text = title,
-                        color = Color(0xff1DB954),
+                        color = Color(0xFF1DB954),
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.sp
                     )

@@ -15,7 +15,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.ushiekane.xmanager.R
 
 @Composable
 fun SocialCard(label: String, @DrawableRes icon: Int) {

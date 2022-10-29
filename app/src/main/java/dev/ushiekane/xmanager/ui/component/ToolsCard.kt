@@ -100,21 +100,27 @@ fun ToolsCard(
                         contentDescription = null
                     )
                 }
-                IconButton(onClick = { showDialog = SETTINGS }) {
+                IconButton(
+                    onClick = { showDialog = SETTINGS }
+                ) {
                     Icon(
                         modifier = Modifier.size(28.dp),
                         imageVector = Icons.Default.Settings,
                         contentDescription = null
                     )
                 }
-                IconButton(onClick = { context.deleteCache() }) {
+                IconButton(
+                    onClick = { context.deleteCache() }
+                ) {
                     Icon(
                         modifier = Modifier.size(28.dp),
                         imageVector = Icons.Default.Refresh,
                         contentDescription = null
                     )
                 }
-                IconButton(onClick = { showDialog = LAUNCH }) {
+                IconButton(
+                    onClick = { showDialog = LAUNCH }
+                ) {
                     Icon(
                         modifier = Modifier.size(28.dp),
                         imageVector = Icons.Default.Launch,
@@ -125,6 +131,7 @@ fun ToolsCard(
         }
     }
 }
+
 private enum class Dialog {
     LAUNCH,
     SETTINGS,
