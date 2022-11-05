@@ -5,7 +5,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,15 +28,19 @@ fun Release(
     isAmoled: Boolean,
     viewModel: HomeViewModel = getViewModel()
 ) {
+    // var showPopup by remember { mutableStateOf(false) }
     Row(
         modifier = Modifier
             .combinedClickable(
-                onClick = { viewModel.downloadApk(releaseLink) },
+                onClick = { viewModel.downloadApk(releaseLink) }, // shopPopup = true
                 onLongClick = { /* viewModel.openDownloadLink(releaseLink) */ }
             )
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        // if (showPopup) {
+        //     DownloadDialog(onDismiss = { showPopup = false }, releaseLink = releaseLink)
+        // }
         if (isAmoled) {
             Icon(
                 modifier = Modifier.size(16.dp),

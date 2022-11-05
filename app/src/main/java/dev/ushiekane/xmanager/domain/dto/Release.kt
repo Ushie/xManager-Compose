@@ -1,4 +1,4 @@
-package dev.ushiekane.xmanager.dto
+package dev.ushiekane.xmanager.domain.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

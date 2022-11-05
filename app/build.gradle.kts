@@ -37,7 +37,7 @@ android {
     }
 
     buildFeatures.compose = true
-    composeOptions.kotlinCompilerExtensionVersion = "1.3.0-rc02"
+    composeOptions.kotlinCompilerExtensionVersion = "1.3.2"
 
 }
 
@@ -48,25 +48,25 @@ dependencies {
 
     implementation("androidx.activity:activity-compose:1.7.0-alpha02")
 
-    val composeVersion = "1.3.0-alpha03"
+    val composeVersion = "1.4.0-alpha01"
     implementation("androidx.compose.ui:ui:${composeVersion}")
     implementation("androidx.compose.material3:material3:1.1.0-alpha01")
     implementation("androidx.compose.material:material-icons-extended:${composeVersion}")
 
     // Accompanist
-    val accompanistVersion = "0.26.0-alpha"
+    val accompanistVersion = "0.27.0"
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
 
     // Taxi (navigation)
     implementation("com.github.X1nto:Taxi:1.2.0")
 
     // Koin
-    val koinVersion = "3.2.2"
+    val koinVersion = "3.3.0"
     implementation("io.insert-koin:koin-android:$koinVersion")
-    implementation("io.insert-koin:koin-androidx-compose:3.2.1")
+    implementation("io.insert-koin:koin-androidx-compose:3.3.0")
 
     // KotlinX
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 
     // Networking
     implementation("com.vk.knet:core:1.0")

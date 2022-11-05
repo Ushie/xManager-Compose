@@ -23,7 +23,6 @@ fun InfoCard(
 ) {
     var expandedState by remember { mutableStateOf(false) }
     val rotateState by animateFloatAsState(targetValue = if (expandedState) 180f else 0f)
-
     Card(
         modifier = Modifier
             .fillMaxWidth()

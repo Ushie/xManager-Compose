@@ -23,7 +23,6 @@ import dev.ushiekane.xmanager.ui.screen.HomeScreen
 import dev.ushiekane.xmanager.ui.theme.XManagerTheme
 
 class MainActivity : ComponentActivity() {
-
     private val installBroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
@@ -36,9 +35,7 @@ class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-
         installSplashScreen()
-
         super.onCreate(savedInstanceState)
         setContent {
             XManagerTheme {
@@ -63,18 +60,17 @@ class MainActivity : ComponentActivity() {
         }
     }
     override fun onStart() {
-        super.onStart()
         registerReceiver(
             installBroadcastReceiver,
             IntentFilter().apply {
                 addAction(AppInstallService.APP_INSTALL_ACTION)
             }
         )
+        super.onStart()
     }
 
     override fun onStop() {
-        super.onStop()
-
         unregisterReceiver(installBroadcastReceiver)
+        super.onStop()
     }
 }

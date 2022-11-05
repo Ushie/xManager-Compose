@@ -1,6 +1,7 @@
 package dev.ushiekane.xmanager.di
 
 import android.content.Context
+import com.vk.knet.core.Knet
 import com.vk.knet.core.utils.ByteArrayPool
 import com.vk.knet.cornet.CronetKnetEngine
 import com.vk.knet.cornet.config.CronetCache
@@ -12,7 +13,7 @@ import org.koin.dsl.module
 import java.util.concurrent.TimeUnit
 
 val httpModule = module {
-    fun client(appContext: Context) = CronetKnetEngine.Build(appContext) {
+    fun provideKnet(appContext: Context) = CronetKnetEngine.Build(appContext) {
         client {
             setCache(CronetCache.InMemory(1024 * 1024 * 10))
 
@@ -42,11 +43,14 @@ val httpModule = module {
         isLenient = true
         ignoreUnknownKeys = true
     }
-
     single {
-        client(androidContext())
+        provideKnet(androidContext())
     }
     single {
         json()
+    }
+
+    single {
+        Knet.Build(get<CronetKnetEngine>())
     }
 }
