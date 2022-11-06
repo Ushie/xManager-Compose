@@ -28,19 +28,19 @@ fun Release(
     isAmoled: Boolean,
     viewModel: HomeViewModel = getViewModel()
 ) {
-    // var showPopup by remember { mutableStateOf(false) }
+    var showPopup by remember { mutableStateOf(false) }
     Row(
         modifier = Modifier
             .combinedClickable(
-                onClick = { viewModel.downloadApk(releaseLink) }, // shopPopup = true
-                onLongClick = { /* viewModel.openDownloadLink(releaseLink) */ }
+                onClick = { showPopup = true; viewModel.downloadApk(releaseLink) },
+                onLongClick = { viewModel.openDownloadLink(releaseLink) }
             )
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // if (showPopup) {
-        //     DownloadDialog(onDismiss = { showPopup = false }, releaseLink = releaseLink)
-        // }
+        if (showPopup) {
+            DownloadDialog(onDismiss = { showPopup = false; viewModel.cancel() }, releaseLink = releaseLink, releaseName = releaseName)
+        }
         if (isAmoled) {
             Icon(
                 modifier = Modifier.size(16.dp),

@@ -73,8 +73,8 @@ dependencies {
     implementation("com.vk.knet:cronet:1.0")
     implementation("com.vk.knet:okcronet:1.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
-    debugImplementation("androidx.compose.ui:ui-tooling:${composeVersion}")
     implementation("androidx.compose.material3:material3:1.1.0-alpha01")
     implementation("androidx.compose.material:material-icons-extended:${composeVersion}")
     implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation("com.github.Justson:Downloader:v5.0.0-androidx")
 }

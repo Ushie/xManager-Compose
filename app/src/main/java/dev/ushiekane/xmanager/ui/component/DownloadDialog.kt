@@ -6,11 +6,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import dev.ushiekane.xmanager.ui.component.DownloadStatus.*
 import dev.ushiekane.xmanager.ui.theme.Typography
 import dev.ushiekane.xmanager.ui.viewmodel.HomeViewModel
 import org.koin.androidx.compose.getViewModel
@@ -18,20 +18,23 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun DownloadDialog(
-    onDismiss: () -> Unit, home: HomeViewModel = getViewModel(), releaseLink: String
+    onDismiss: () -> Unit, home: HomeViewModel = getViewModel(), releaseLink: String, releaseName: String
 ) {
-    home.downloadApk(releaseLink)
-    Dialog(onDismissRequest = onDismiss) {
-        Surface(
-            color = Color(0xFF212121), shape = RoundedCornerShape(8.dp)
-        ) {
-            Column(
-                modifier = Modifier
-                    .sizeIn(minWidth = 280.dp, maxWidth = 560.dp)
-                    .padding(8.dp)
-            ) {
-                when (home.status) {
-                    DOWNLOADING -> {
+    fun close() {
+        home.downloadStatus = HomeViewModel.Status.Idle
+        onDismiss()
+    }
+    when (home.downloadStatus) {
+        HomeViewModel.Status.Downloading -> {
+            Dialog(onDismissRequest = { close() }) {
+                Surface(
+                    color = Color(0xFF212121), shape = RoundedCornerShape(8.dp)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .sizeIn(minWidth = 280.dp, maxWidth = 560.dp)
+                            .padding(8.dp)
+                    ) {
                         Text(
                             modifier = Modifier.padding(12.dp),
                             text = "DOWNLOADING FILE...",
@@ -42,17 +45,31 @@ fun DownloadDialog(
                             Modifier.fillMaxWidth()
                         ) {
                             LinearProgressIndicator(
-                                home.progress.toFloat(),
+                                home.calculateBar(home.downloadedSize, home.totalSize),
                                 modifier = Modifier
-                                    .height(4.dp)
-                                    .fillMaxWidth(),
+                                    .height(10.dp)
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(8.dp)),
                                 color = Color(0xFF1DB954),
                                 trackColor = Color.Transparent
                             )
                             Row(Modifier.fillMaxWidth()) {
-                                Text(text = "%" + home.progress, color = Color.White)
+                                Text(
+                                    text = "${
+                                        home.calculatePercentage(
+                                            home.downloadedSize,
+                                            home.totalSize
+                                        )
+                                    }%"
+                                )
                                 Spacer(Modifier.weight(1f, true))
-                                Text("${home.downloaded} MB | ${home.total} MB")
+                                Text(
+                                    text = "${home.calculateSize(home.downloadedSize)} MB | ${
+                                        home.calculateSize(
+                                            home.totalSize
+                                        )
+                                    } MB"
+                                )
                             }
                         }
                         Row(
@@ -61,7 +78,10 @@ fun DownloadDialog(
                             Button(
                                 onClick = { home.fixer(releaseLink) },
                                 shape = RoundedCornerShape(4.dp),
-                                border = BorderStroke(width = 1.0.dp, color = Color(0xFF303030)),
+                                border = BorderStroke(
+                                    width = 1.0.dp,
+                                    color = Color(0xFF303030)
+                                ),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = Color(0xFF252525)
                                 )
@@ -74,7 +94,7 @@ fun DownloadDialog(
                             }
                             Spacer(Modifier.weight(1f, true))
                             Button(
-                                onClick = onDismiss,
+                                onClick = {home.cancel(); close()},
                                 shape = RoundedCornerShape(4.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = Color(0xFF252525)
@@ -88,13 +108,23 @@ fun DownloadDialog(
                             }
                         }
                     }
-                    CANCELLED -> {
-                        onDismiss()
-                    }
-                    FAILED -> {
-                        onDismiss()
-                    }
-                    SUCCESSFUL -> {
+                }
+            }
+        }
+        HomeViewModel.Status.Idle -> {
+        }
+        HomeViewModel.Status.Failed -> {
+        }
+        HomeViewModel.Status.Successful -> {
+            Dialog(onDismissRequest = { close() }) {
+                Surface(
+                    color = Color(0xFF212121), shape = RoundedCornerShape(8.dp)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .sizeIn(minWidth = 280.dp, maxWidth = 560.dp)
+                            .padding(8.dp)
+                    ) {
                         Text(
                             modifier = Modifier.padding(12.dp),
                             text = "SUCCESSFULLY\nDOWNLOADED",
@@ -107,7 +137,7 @@ fun DownloadDialog(
                             horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
                             Button(
-                                onClick = onDismiss,
+                                onClick = { close() },
                                 shape = RoundedCornerShape(4.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = Color(0xFF252525)
@@ -121,7 +151,7 @@ fun DownloadDialog(
                             }
                             Spacer(Modifier.weight(1f, true))
                             Button(
-                                onClick = { onDismiss(); home.installApk() },
+                                onClick = { home.installApk(); close() },
                                 shape = RoundedCornerShape(4.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = Color(0xFF252525)
@@ -138,9 +168,8 @@ fun DownloadDialog(
                 }
             }
         }
-    }
-}
+        HomeViewModel.Status.Confirm ->  {
 
-enum class DownloadStatus {
-    DOWNLOADING, CANCELLED, FAILED, SUCCESSFUL
+        }
+    }
 }

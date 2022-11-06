@@ -11,7 +11,7 @@ class Application : Application() {
 
         startKoin {
             androidContext(this@Application)
-            modules(httpModule, viewModelModule, repositoryModule)
+            modules(httpModule, viewModelModule, repositoryModule, downloaderModule)
         }
     }
 }
