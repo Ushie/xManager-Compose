@@ -15,6 +15,7 @@ import com.vk.knet.core.Knet
 import dev.ushiekane.xmanager.api.API
 import dev.ushiekane.xmanager.domain.dto.Release
 import dev.ushiekane.xmanager.domain.repository.GithubRepository
+import dev.ushiekane.xmanager.preferences.PreferencesManager
 import dev.ushiekane.xmanager.ui.component.DownloadStatus
 import dev.ushiekane.xmanager.util.get
 import dev.ushiekane.xmanager.util.install
@@ -27,6 +28,7 @@ class HomeViewModel(
     private val repository: GithubRepository,
     private val client: Knet,
     private val API: API,
+    val prefs: PreferencesManager
 ) : ViewModel() {
     val normalReleasesList = mutableStateListOf<Release.NormalReleases>()
     val amoledReleasesList = mutableStateListOf<Release.AmoledReleases>()

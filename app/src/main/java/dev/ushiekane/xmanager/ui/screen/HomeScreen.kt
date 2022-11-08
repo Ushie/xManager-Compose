@@ -1,7 +1,13 @@
 package dev.ushiekane.xmanager.ui.screen
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.gestures.FlingBehavior
+import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Help
 import androidx.compose.material.icons.filled.Info
@@ -19,14 +25,15 @@ import dev.ushiekane.xmanager.ui.component.*
 import dev.ushiekane.xmanager.ui.viewmodel.HomeViewModel
 import org.koin.androidx.compose.getViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     onClickSettings: () -> Unit,
     viewModel: HomeViewModel = getViewModel()
 ) {
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize(),
         topBar = {
             TopAppBar(
                 title = {
@@ -46,6 +53,7 @@ fun HomeScreen(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(8.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             val uwu = false
             ReleaseCard(
@@ -56,14 +64,13 @@ fun HomeScreen(
                     if (uwu) {
                         LazyColumn {
                             viewModel.normalReleasesList.forEach {
-                                item { Release(it.name, it.downloadUrl, false) }
+                                item { Release(it.version, it.downloadUrl, it.arch, false) }
                             }
                         }
-                    }
-                    else {
+                    } else {
                         LazyColumn {
                             viewModel.normalClonedReleasesList.forEach {
-                                item { Release(it.name, it.downloadUrl, false) }
+                                item { Release(it.version, it.downloadUrl, it.arch, false) }
                             }
                         }
                     }
@@ -77,14 +84,13 @@ fun HomeScreen(
                     if (uwu) {
                         LazyColumn {
                             viewModel.amoledReleasesList.forEach {
-                                item { Release(it.name, it.downloadUrl, true) }
+                                item { Release(it.version, it.downloadUrl, it.arch, true) }
                             }
                         }
-                    }
-                    else {
+                    } else {
                         LazyColumn {
                             viewModel.amoledClonedReleasesList.forEach {
-                                item { Release(it.name, it.downloadUrl , true) }
+                                item { Release(it.version, it.downloadUrl, it.arch, true) }
                             }
                         }
                     }

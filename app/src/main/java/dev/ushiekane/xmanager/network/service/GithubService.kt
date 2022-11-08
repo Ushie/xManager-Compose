@@ -17,6 +17,6 @@ class GithubService(private val client: Knet, private val json: Json) {
 
     private companion object {
         private const val apiUrl =
-            "https://raw.githubusercontent.com/xManager-v2/xManager-Spotify-Core/main/api/public.json"
+            "https://raw.githubusercontent.com/Ushie/xManager-Compose/main/api.json"
     }
 }

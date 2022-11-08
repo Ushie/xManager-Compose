@@ -94,7 +94,7 @@ fun ReleaseCard(
             AnimatedVisibility(expandedState) {
                 Box(
                     modifier = Modifier
-                        .padding(12.dp, 0.dp, 12.dp, 12.dp)
+                        .padding(6.dp, 0.dp, 6.dp, 12.dp)
                         .height(260.dp)
                 ) {
                     expandedContent()

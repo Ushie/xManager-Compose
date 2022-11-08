@@ -44,7 +44,7 @@ fun InfoCard(
                     )
                     Spacer(Modifier.weight(1f))
                     Text(
-                        text = Build.SUPPORTED_ABIS.first().uppercase() ,
+                        text = Build.SUPPORTED_ABIS.first().uppercase(),
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.sp
                     )

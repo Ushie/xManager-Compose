@@ -11,10 +11,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import dev.ushiekane.xmanager.ui.component.DownloadStatus.*
+import dev.ushiekane.xmanager.ui.theme.CustomFont
 import dev.ushiekane.xmanager.ui.theme.Typography
 import dev.ushiekane.xmanager.ui.viewmodel.HomeViewModel
 import org.koin.androidx.compose.getViewModel
-
 
 @Composable
 fun DownloadDialog(
@@ -62,9 +62,7 @@ fun DownloadDialog(
                                 onClick = { home.fixer(releaseLink) },
                                 shape = RoundedCornerShape(4.dp),
                                 border = BorderStroke(width = 1.0.dp, color = Color(0xFF303030)),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color(0xFF252525)
-                                )
+                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF252525))
                             ) {
                                 Text(
                                     text = "FIXER",
@@ -76,9 +74,7 @@ fun DownloadDialog(
                             Button(
                                 onClick = onDismiss,
                                 shape = RoundedCornerShape(4.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color(0xFF252525)
-                                )
+                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF252525))
                             ) {
                                 Text(
                                     text = "CANCEL",
@@ -97,9 +93,10 @@ fun DownloadDialog(
                     SUCCESSFUL -> {
                         Text(
                             modifier = Modifier.padding(12.dp),
-                            text = "SUCCESSFULLY\nDOWNLOADED",
+                            text = "SUCCESSFULLY DOWNLOADED",
                             textAlign = TextAlign.Left,
                             color = Color(0xFF1DB954),
+                            fontFamily = CustomFont,
                             style = Typography.titleMedium
                         )
                         Row(
@@ -109,9 +106,7 @@ fun DownloadDialog(
                             Button(
                                 onClick = onDismiss,
                                 shape = RoundedCornerShape(4.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color(0xFF252525)
-                                )
+                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF252525))
                             ) {
                                 Text(
                                     text = "LATER",
@@ -123,9 +118,7 @@ fun DownloadDialog(
                             Button(
                                 onClick = { onDismiss(); home.installApk() },
                                 shape = RoundedCornerShape(4.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color(0xFF252525)
-                                )
+                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF252525))
                             ) {
                                 Text(
                                     text = "INSTALL NOW",

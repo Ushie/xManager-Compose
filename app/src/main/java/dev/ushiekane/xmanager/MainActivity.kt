@@ -20,6 +20,7 @@ import com.xinto.taxi.rememberBackstackNavigator
 import dev.ushiekane.xmanager.installer.AppInstallService
 import dev.ushiekane.xmanager.ui.navigation.AppDestination
 import dev.ushiekane.xmanager.ui.screen.HomeScreen
+import dev.ushiekane.xmanager.ui.screen.SettingsScreen
 import dev.ushiekane.xmanager.ui.theme.XManagerTheme
 
 class MainActivity : ComponentActivity() {
@@ -52,7 +53,10 @@ class MainActivity : ComponentActivity() {
                 ) { destination ->
                     when (destination) {
                         is AppDestination.Home -> HomeScreen(
-                            onClickSettings = { /* TODO */ }
+                            onClickSettings = { navigator.push(AppDestination.Settings) }
+                        )
+                        is AppDestination.Settings -> SettingsScreen(
+                            navigator = navigator
                         )
                     }
                 }

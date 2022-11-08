@@ -1,8 +1,6 @@
 package dev.ushiekane.xmanager.ui.theme
 
-import android.content.Context
 import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
