@@ -22,7 +22,7 @@ fun Popup(
         onDismissRequest = onDismiss
     ) {
         Surface(
-            color = Color(0xFF212121),
+            color = Color(0xFF191919),
             shape = RoundedCornerShape(8.dp)
         ) {
             Column(

@@ -21,15 +21,16 @@ fun Context.openUrl(url: String) {
 }
 fun Context.openAppInfo(pkg: String) {
     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-        data = Uri.parse("package:" + pkg)
+        data = Uri.parse("package:$pkg")
         flags = Intent.FLAG_ACTIVITY_NEW_TASK
     })
 }
 fun Context.openApp(pkg: String) = startActivity(packageManager.getLaunchIntentForPackage(pkg))
 
-fun Context.deleteCache() {
-    cacheDir.deleteRecursively()
-    Toast.makeText(this, "Successfully deleted!", Toast.LENGTH_SHORT).show()
+fun Context.delete() {
+    val delete = xManagerDirectory.deleteRecursively()
+    val successOrNot = if (delete) "Successfully deleted!" else "Failed to delete!"
+    Toast.makeText(this, successOrNot, Toast.LENGTH_SHORT).show()
 }
 
 val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

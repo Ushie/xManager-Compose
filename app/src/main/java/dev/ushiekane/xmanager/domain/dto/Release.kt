@@ -18,22 +18,26 @@ class Release(
 ) {
     @Serializable
     data class NormalReleases(
-        @SerialName("Title") val name: String,
+        @SerialName("Version") val version: String,
+        @SerialName("Arch") val arch: String,
         @SerialName("Link") val downloadUrl: String
     )
     @Serializable
     data class AmoledReleases(
-        @SerialName("Title") val name: String,
+        @SerialName("Version") val version: String,
+        @SerialName("Arch") val arch: String,
         @SerialName("Link") val downloadUrl: String
     )
     @Serializable
     data class NormalClonedReleases(
-        @SerialName("Title") val name: String,
+        @SerialName("Version") val version: String,
+        @SerialName("Arch") val arch: String,
         @SerialName("Link") val downloadUrl: String
     )
     @Serializable
     data class AmoledClonedReleases(
-        @SerialName("Title") val name: String,
+        @SerialName("Version") val version: String,
+        @SerialName("Arch") val arch: String,
         @SerialName("Link") val downloadUrl: String
     )
     @Serializable

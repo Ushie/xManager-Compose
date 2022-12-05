@@ -1,56 +1,34 @@
 package dev.ushiekane.xmanager.di
 
-import android.content.Context
-import com.vk.knet.core.Knet
-import com.vk.knet.core.utils.ByteArrayPool
-import com.vk.knet.cornet.CronetKnetEngine
-import com.vk.knet.cornet.config.CronetCache
-import com.vk.knet.cornet.config.CronetQuic
-import com.vk.knet.cornet.pool.buffer.CronetNativeByteBufferPool
+import io.ktor.client.*
+import io.ktor.client.engine.okhttp.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
-import org.koin.android.ext.koin.androidContext
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
-import java.util.concurrent.TimeUnit
 
 val httpModule = module {
-    fun provideKnet(appContext: Context) = CronetKnetEngine.Build(appContext) {
-        client {
-            setCache(CronetCache.InMemory(1024 * 1024 * 10))
-
-            enableHttp2(true)
-            enableQuic(
-                CronetQuic()
+    fun provideHttpClient() = HttpClient(OkHttp) {
+        engine {
+            config {
+                followRedirects(true)
+                followSslRedirects(true)
+            }
+        }
+        BrowserUserAgent()
+        install(ContentNegotiation) {
+            json(
+                json = Json {
+                encodeDefaults = true
+                isLenient = true
+                ignoreUnknownKeys = true
+            },
+            contentType = ContentType.Text.Plain
             )
-
-            useBrotli(true)
-            connectTimeout(15, TimeUnit.SECONDS)
-            writeTimeout(15, TimeUnit.SECONDS)
-            readTimeout(15, TimeUnit.SECONDS)
-
-            nativePool(CronetNativeByteBufferPool.DEFAULT)
-            arrayPool(ByteArrayPool.DEFAULT)
-
-            maxConcurrentRequests(50)
-            maxConcurrentRequestsPerHost(10)
-
-            followRedirects(true)
-            followSslRedirects(true)
         }
     }
-
-    fun json() = Json {
-        encodeDefaults = true
-        isLenient = true
-        ignoreUnknownKeys = true
-    }
-    single {
-        provideKnet(androidContext())
-    }
-    single {
-        json()
-    }
-
-    single {
-        Knet.Build(get<CronetKnetEngine>())
-    }
+    singleOf(::provideHttpClient)
 }

@@ -1,8 +1,6 @@
 package dev.ushiekane.xmanager.ui.theme
 
-import android.content.Context
 import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -18,12 +16,6 @@ private val DarkColorScheme = darkColorScheme(
     tertiary = Pink80
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-)
-
 @Composable
 fun XManagerTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -33,9 +25,7 @@ fun XManagerTheme(
     val isDynamicColor = dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val colorScheme = when {
         !isDynamicColor && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
-        !isDynamicColor && !darkTheme -> dynamicLightColorScheme(LocalContext.current)
-        darkTheme -> DarkColorScheme
-        else -> lightColorScheme()
+        else -> DarkColorScheme
     }
     val systemUiController = rememberSystemUiController()
 

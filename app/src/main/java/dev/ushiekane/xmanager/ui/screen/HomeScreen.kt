@@ -45,7 +45,7 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .padding(paddingValues)
-                .padding(8.dp)
+                .padding(8.dp, 18.dp, 8.dp, 8.dp)
         ) {
             val uwu = false
             ReleaseCard(
@@ -56,14 +56,14 @@ fun HomeScreen(
                     if (uwu) {
                         LazyColumn {
                             viewModel.normalReleasesList.forEach {
-                                item { Release(it.name, it.downloadUrl, false) }
+                                item { Release(it.version, it.arch, it.downloadUrl, viewModel.normalReleasesList.indexOf(it) == 0, false) }
                             }
                         }
                     }
                     else {
                         LazyColumn {
                             viewModel.normalClonedReleasesList.forEach {
-                                item { Release(it.name, it.downloadUrl, false) }
+                                item { Release(it.version, it.arch, it.downloadUrl, viewModel.normalClonedReleasesList.indexOf(it) == 0, false) }
                             }
                         }
                     }
@@ -77,14 +77,14 @@ fun HomeScreen(
                     if (uwu) {
                         LazyColumn {
                             viewModel.amoledReleasesList.forEach {
-                                item { Release(it.name, it.downloadUrl, true) }
+                                item { Release(it.version, it.arch, it.downloadUrl, viewModel.amoledReleasesList.indexOf(it) == 0,true) }
                             }
                         }
                     }
                     else {
                         LazyColumn {
                             viewModel.amoledClonedReleasesList.forEach {
-                                item { Release(it.name, it.downloadUrl , true) }
+                                item { Release(it.version, it.arch, it.downloadUrl,  viewModel.amoledClonedReleasesList.indexOf(it) == 0,true) }
                             }
                         }
                     }
