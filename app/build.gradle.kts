@@ -48,27 +48,26 @@ dependencies {
 
     implementation("androidx.activity:activity-compose:1.7.0-alpha02")
 
-    val composeVersion = "1.4.0-alpha01"
+    val composeVersion = "1.4.0-alpha03"
     implementation("androidx.compose.ui:ui:${composeVersion}")
-    implementation("androidx.compose.material3:material3:1.1.0-alpha02")
+    implementation("androidx.compose.material3:material3:1.1.0-alpha03")
     implementation("androidx.compose.material:material-icons-extended:${composeVersion}")
 
     // Accompanist
-    val accompanistVersion = "0.27.0"
+    val accompanistVersion = "0.28.0"
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
 
     // Taxi (navigation)
     implementation("com.github.X1nto:Taxi:1.2.0")
 
     // Koin
-    val koinVersion = "3.3.0"
+    val koinVersion = "3.3.2"
     implementation("io.insert-koin:koin-android:$koinVersion")
-    implementation("io.insert-koin:koin-androidx-compose:3.3.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.1")
 
     // Ktor
-    val ktorVersion = "2.1.3"
+    val ktorVersion = "2.2.2"
     implementation("io.ktor:ktor-client-core:$ktorVersion")
-    implementation("io.ktor:ktor-client-logging:$ktorVersion")
     implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
@@ -76,6 +75,4 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("androidx.compose.material:material-icons-extended:${composeVersion}")
     implementation("androidx.core:core-splashscreen:1.0.0")
-
-    implementation("com.liulishuo.filedownloader:library:1.7.7")
 }

@@ -1,9 +1,5 @@
 package dev.ushiekane.xmanager
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -17,21 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.xinto.taxi.Taxi
 import com.xinto.taxi.rememberBackstackNavigator
-import dev.ushiekane.xmanager.installer.AppInstallService
 import dev.ushiekane.xmanager.ui.navigation.AppDestination
 import dev.ushiekane.xmanager.ui.screen.HomeScreen
 import dev.ushiekane.xmanager.ui.theme.XManagerTheme
 
 class MainActivity : ComponentActivity() {
-    private val installBroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            when (intent?.action) {
-                AppInstallService.APP_INSTALL_ACTION -> {
-
-                }
-            }
-        }
-    }
 
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,19 +44,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-    override fun onStart() {
-        registerReceiver(
-            installBroadcastReceiver,
-            IntentFilter().apply {
-                addAction(AppInstallService.APP_INSTALL_ACTION)
-            }
-        )
-        super.onStart()
-    }
-
-    override fun onStop() {
-        unregisterReceiver(installBroadcastReceiver)
-        super.onStop()
     }
 }

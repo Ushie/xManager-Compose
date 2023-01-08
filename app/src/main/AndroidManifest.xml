@@ -49,8 +49,7 @@
                 android:value="" />
         </activity>
 
-        <service android:name=".installer.AppInstallService"/>
-        <service android:name=".installer.AppUninstallService"/>
+        <service android:name=".installer.service.AppInstallService"/>
     </application>
 
 </manifest>

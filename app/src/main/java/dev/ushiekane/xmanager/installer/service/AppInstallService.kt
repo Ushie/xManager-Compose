@@ -1,18 +1,20 @@
-package dev.ushiekane.xmanager.installer
+package dev.ushiekane.xmanager.installer.service
 
 import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageInstaller
 import android.os.IBinder
 
-class AppUninstallService : Service() {
+class AppInstallService : Service() {
 
     override fun onStartCommand(
         intent: Intent,
         flags: Int,
         startId: Int
     ): Int {
-        when (intent.getIntExtra(PackageInstaller.EXTRA_STATUS, -999)) {
+        val extraStatus = intent.getIntExtra(PackageInstaller.EXTRA_STATUS, -999)
+        val extraStatusMessage = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)
+        when (extraStatus) {
             PackageInstaller.STATUS_PENDING_USER_ACTION -> {
                 startActivity(
                     intent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT).apply {
@@ -22,7 +24,9 @@ class AppUninstallService : Service() {
             }
             else -> {
                 sendBroadcast(Intent().apply {
-                    action = APP_UNINSTALL_ACTION
+                    action = APP_INSTALL_ACTION
+                    putExtra(EXTRA_INSTALL_STATUS, extraStatus)
+                    putExtra(EXTRA_INSTALL_STATUS_MESSAGE, extraStatusMessage)
                 })
             }
         }
@@ -33,6 +37,10 @@ class AppUninstallService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     companion object {
-        const val APP_UNINSTALL_ACTION = "APP_UNINSTALL_ACTION"
+        const val APP_INSTALL_ACTION = "APP_INSTALL_ACTION"
+
+        const val EXTRA_INSTALL_STATUS = "EXTRA_INSTALL_STATUS"
+        const val EXTRA_INSTALL_STATUS_MESSAGE = "EXTRA_INSTALL_STATUS_MESSAGE"
     }
+
 }

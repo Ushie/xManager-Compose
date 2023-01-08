@@ -11,17 +11,20 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.ushiekane.xmanager.ui.component.Dialog.*
-import dev.ushiekane.xmanager.util.*
+import dev.ushiekane.xmanager.util.clonedPackageName
+import dev.ushiekane.xmanager.util.packageName
 
 @Composable
 fun ToolsCard(
+    onLaunch: (String) -> Unit,
+    onAppInfo: (String) -> Unit,
+    onUninstall: (String) -> Unit,
+    onDelete: () -> Unit,
 ) {
-    val context = LocalContext.current
     var showDialog by remember { mutableStateOf(NONE) }
     Card(
         modifier = Modifier
@@ -37,11 +40,11 @@ fun ToolsCard(
                 when (showDialog) {
                     LAUNCH -> {
                         Popup(title = "OPEN PATCHED", onDismiss = { showDialog = NONE }, onClick = {
-                            context.openApp(
+                            onLaunch(
                                 packageName
                             )
                         }, onClickCloned = {
-                            context.openApp(
+                            onLaunch(
                                 clonedPackageName
                             )
                         })
@@ -51,12 +54,12 @@ fun ToolsCard(
                             title = "OPEN SETTINGS",
                             onDismiss = { showDialog = NONE },
                             onClick = {
-                                context.openAppInfo(
+                                onAppInfo(
                                     packageName
                                 )
                             },
                             onClickCloned = {
-                                context.openAppInfo(
+                                onAppInfo(
                                     clonedPackageName
                                 )
                             })
@@ -66,12 +69,12 @@ fun ToolsCard(
                             title = "UNINSTALL PATCHED",
                             onDismiss = { showDialog = NONE },
                             onClick = {
-                                context.uninstall(
+                                onUninstall(
                                     packageName
                                 )
                             },
                             onClickCloned = {
-                                context.uninstall(
+                                onUninstall(
                                     clonedPackageName
                                 )
                             })
@@ -110,7 +113,7 @@ fun ToolsCard(
                     )
                 }
                 IconButton(
-                    onClick = {  }
+                    onClick = onDelete
                 ) {
                     Icon(
                         modifier = Modifier.size(28.dp),

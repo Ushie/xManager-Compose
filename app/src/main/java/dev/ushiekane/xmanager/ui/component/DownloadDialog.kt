@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -17,68 +16,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import dev.ushiekane.xmanager.ui.theme.Typography
-import dev.ushiekane.xmanager.ui.viewmodel.HomeViewModel
-import dev.ushiekane.xmanager.ui.viewmodel.HomeViewModel.Status
-import org.koin.androidx.compose.getViewModel
 
-
-@Composable
-fun DownloadDialog(
-    onDismiss: () -> Unit,
-    releaseLink: String,
-    releaseArch: String,
-    releaseVersion: String,
-    isCloned: Boolean,
-    isLatest: Boolean,
-    isAmoled: Boolean,
-    home: HomeViewModel = getViewModel()
-) {
-    val name = home.nameBuilder(releaseVersion, isCloned, isAmoled)
-    LaunchedEffect(Unit) {
-        home.cancel()
-        home.checkIfExisting(name)
-    }
-    with(home) {
-        when (status) {
-            Status.Downloading -> {
-                DownloadingDialog(
-                    onDismiss = onDismiss,
-                    onFixer = { fixer(releaseLink) },
-                    onCancel = { cancel() },
-                    progress = calculateBar(downloaded, total),
-                    downloaded = calculateSize(downloaded),
-                    total = calculateSize(total),
-                    percentage = calculatePercentage(downloaded, total),
-                )
-            }
-            Status.Successful -> {
-                SuccessDialog(
-                    onDismiss = onDismiss,
-                    onInstall = { installApk(name) }
-                )
-            }
-            Status.Confirm -> {
-                ConfirmDialog(
-                    onDismiss = onDismiss,
-                    onDownload = { download(releaseLink, name) },
-                    onCopy = { copyToClipboard(releaseLink) },
-                    latest = isLatest,
-                    isAmoled = isAmoled,
-                    releaseArch = releaseArch,
-                    releaseVersion = releaseVersion,
-                )
-            }
-            Status.Existing -> {
-                ExistingDialog(
-                    onDismiss = onDismiss,
-                    onClickDelete = { home.delete() },
-                    onInstall = { home.installApk(name) }
-                )
-            }
-            else -> onDismiss()
-        }
-    }
-}
 
 @Composable
 fun ConfirmDialog(
