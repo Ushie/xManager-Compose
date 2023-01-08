@@ -1,461 +1,195 @@
 {
-  "Regular_Latest": "8.7.78.373",
-  "Amoled_Latest": "8.7.78.373",
-  "RC_Latest": "8.7.78.373",
-  "ABC_Latest": "8.7.78.373",
-  "App_Changelogs": "•Added Important Notification\n•Added/Updated Bulgarian Translation (Thanks meorro and martinov83!)\n•Updated Chinese - Traditional Translation (Thanks TragicLifeHu!)\n•Updated Romanian Translation (Thanks StephenTheMoldovanxdxin!)\n•Updated French Translation (Thanks xerta555!)\n•Updated Spanish Translation (Thanks Snapdragon845GMS!)\n•Updated Korean Translation (Thanks Annyeong-One!)",
-  "Supporters": "Ricardo G.\nAakarshit U.\nAmaricai A.\nAntonio M.\nJuleshwar Babu T.M.\nYash G.\nCamille D.\nAnudeep N.D.\nKrzysztof S.\nAlex C.\nCarlos C.\nPrabandaru P.\nRussel R.\nLucha G.S.\nAleksandrs F.\nGeorgios H.\nLevente T.\nFahim Fahim | Z.\nQuiet\nMikaël V.\nShem W.\nCatalin P.\nPhilipp J.\nKristian H.\nLandon P.\nJay W.\nMichael P.\nAditya C.\nTyler H.\nJose Nayar A.C.\nJohn Carlo R.M.\nAngel G.\nMarijn B.\nMiguel Filipe M.F.\nCristobal Ruiz G.\nMichael P.\nSiva Sri H.M.\nEli S.\nFaris D.\nAshesh S.\nDaniel F.\nSandis Z.\nMohammed M.\nPaul M.\nEyner A.O.F.\nSiyanda M.\nLehi W.",
+  "Regular_Latest": "8.7.88.496",
+  "Amoled_Latest": "8.7.88.496",
+  "RC_Latest": "8.7.88.496",
+  "ABC_Latest": "8.7.88.496",
+  "Lite_Latest": "1.9.0.25719",
+  "App_Changelogs": "•Migrated from MaterialComponents to Material You (M3)\n•Added Mirror Links (To avoid abuse)\n•Added Serbian (Cyrillic) Translation (Thanks nexiRS!)\n•Added Serbian (Latin) Translation (Thanks nexiRS!)\n•Updated Copy Url Link (Mirror Link by default)\n•Updated Telegram Link\n•Reworked Alert and Progress Dialog\n•Fixed Alert Dialog Bug (Expanding after idle)\n•Fixed Reminder Notification (Causes java.lang.NoSuchMethodError)\n•Other Layouts and Texts Adjusted\n•Minor Bugs Fixed, Optimizations and Improvements",
+  "Supporters": "Ricardo G.\nAakarshit U.\nAmaricai A.\nAntonio M.\nJuleshwar Babu T.M.\nYash G.\nCamille D.\nAnudeep N.D.\nKrzysztof S.\nAlex C.\nCarlos C.\nPrabandaru P.\nRussel R.\nLucha G.S.\nAleksandrs F.\nGeorgios H.\nLevente T.\nFahim Fahim | Z.\nQuiet\nMikaël V.\nShem W.\nCatalin P.\nPhilipp J.\nKristian H.\nLandon P.\nJay W.\nMichael P.\nAditya C.\nTyler H.\nJose Nayar A.C.\nJohn Carlo R.M.\nAngel G.\nMarijn B.\nMiguel Filipe M.F.\nCristobal Ruiz G.\nMichael P.\nSiva Sri H.M.\nEli S.\nFaris D.\nAshesh S.\nDaniel F.\nSandis Z.\nMohammed M.\nPaul M.\nEyner A.O.F.\nSiyanda M.\nLehi W.\nKonstantin S.\nSimon L.\nSeth C.\nAhmad Husaini B.S.\nNicola D.\nFelipe S.\nShay B.",
   "Rewarded_Ads": "ca-app-pub-3319548483346434/5639572396",
   "Update": "https://github.com/xManager-v2/xManager-Spotify/releases/latest/download/xManager.apk",
-  "Server": "4.1",
+  "Server": "4.3",
   "Regular": [
     {
-      "Version": "8.6.98.900",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3MhdJxC"
-    },
-    {
-      "Version": "8.6.98.900",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3thJn7B"
-    },
-    {
-      "Version": "8.7.04.1056",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3xaDVnZ"
-    },
-    {
-      "Version": "8.7.04.1056",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3awWLxW"
-    },
-    {
-      "Version": "8.7.10.1262",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3Mpf9Gl"
-    },
-    {
-      "Version": "8.7.10.1262",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3tgHl7q"
-    },
-    {
-      "Version": "8.7.20.1261",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3GTG8Zk"
-    },
-    {
-      "Version": "8.7.20.1261",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3mhVEET"
-    },
-    {
-      "Version": "8.7.30.1221",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/398v4Lu"
-    },
-    {
-      "Version": "8.7.30.1221",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3NX3cZD"
-    },
-    {
-      "Version": "8.7.36.923",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3twUcm8"
-    },
-    {
-      "Version": "8.7.36.923",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3tx3LSl"
-    },
-    {
-      "Version": "8.7.44.968",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3RF2sen"
-    },
-    {
-      "Version": "8.7.44.968",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3IHkhWd"
-    },
-    {
-      "Version": "8.7.48.1062",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3cCUGSa"
-    },
-    {
-      "Version": "8.7.48.1062",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3Jib0UV"
-    },
-    {
       "Version": "8.7.62.398",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3d7fkdF"
+      "Link": "https://bit.ly/3UxPMpT"
     },
     {
       "Version": "8.7.62.398",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3xdYdhk"
+      "Link": "https://bit.ly/3VOSNDb"
     },
     {
       "Version": "8.7.70.553",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3RSvh5X"
+      "Link": "https://bit.ly/3UuRqbQ"
     },
     {
       "Version": "8.7.70.553",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3Cpiwdu"
+      "Link": "https://bit.ly/3VT5mxx"
     },
     {
       "Version": "8.7.78.373",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3zxmVKC"
+      "Link": "https://bit.ly/3UATaQF"
     },
     {
       "Version": "8.7.78.373",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3TQJ9iS"
-    }
+      "Link": "https://bit.ly/3FqrqtR"
+    },
+    {
+      "Version": "8.7.88.496",
+      "Arch": "ARM64-V8A",
+      "Link": "https://bit.ly/3Y1DlWc"
+    },
+    {
+      "Version": "8.7.88.496",
+      "Arch": "ARMEABI-V7A",
+      "Link": "https://bit.ly/3UuWAo9"
+    },
   ],
   "Amoled": [
     {
-      "Version": "8.7.04.1056",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3zjZLbf"
-    },
-    {
-      "Version": "8.7.04.1056",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3xgxkZs"
-    },
-    {
-      "Version": "8.7.10.1262",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3NnfLxq"
-    },
-    {
-      "Version": "8.7.10.1262",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3Q0WkMB"
-    },
-    {
-      "Version": "8.7.20.1261",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3Q68Vy0"
-    },
-    {
-      "Version": "8.7.20.1261",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/39bfNcX"
-    },
-    {
-      "Version": "8.7.30.1221",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3NR53iy"
-    },
-    {
-      "Version": "8.7.30.1221",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3zkIONS"
-    },
-    {
-      "Version": "8.7.36.923",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3xJtn0I"
-    },
-    {
-      "Version": "8.7.36.923",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3NQqf8N"
-    },
-    {
-      "Version": "8.7.44.968",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3AUkS4Z"
-    },
-    {
-      "Version": "8.7.44.968",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3zdprWB"
-    },
-    {
-      "Version": "8.7.48.1062",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3oZxEYR"
-    },
-    {
-      "Version": "8.7.48.1062",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3oHgejy"
-    },
-    {
       "Version": "8.7.62.398",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3RsFwOZ"
+      "Link": "https://bit.ly/3P3Aw34"
     },
     {
       "Version": "8.7.62.398",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3xeeP8N"
+      "Link": "https://bit.ly/3BbmKWm"
     },
     {
       "Version": "8.7.70.553",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3TdOsID"
+      "Link": "https://bit.ly/3VwWUnA"
     },
     {
       "Version": "8.7.70.553",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3ENbZMD"
+      "Link": "https://bit.ly/3iqPlQK"
     },
     {
       "Version": "8.7.78.373",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3UcGm3s"
+      "Link": "https://bit.ly/3gZfmX6"
     },
     {
       "Version": "8.7.78.373",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3h1KhBC"
-    }
+      "Link": "https://bit.ly/3gYXEmx"
+    },
+    {
+      "Version": "8.7.88.496",
+      "Arch": "ARM64-V8A",
+      "Link": "https://bit.ly/3VCRGXy"
+    },
+    {
+      "Version": "8.7.88.496",
+      "Arch": "ARMEABI-V7A",
+      "Link": "https://bit.ly/3W00yq1"
+    },
   ],
   "Regular_Cloned": [
     {
-      "Version": "8.7.04.1056",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3NkrQDA"
-    },
-    {
-      "Version": "8.7.04.1056",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3xp0RBr"
-    },
-    {
-      "Version": "8.7.10.1262",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3Nu9ct1"
-    },
-    {
-      "Version": "8.7.10.1262",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3xlcs4b"
-    },
-    {
-      "Version": "8.7.20.1261",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3x9SwQL"
-    },
-    {
-      "Version": "8.7.20.1261",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3NksbWS"
-    },
-    {
-      "Version": "8.7.30.1221",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3ayj0DT"
-    },
-    {
-      "Version": "8.7.30.1221",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3av57pH"
-    },
-    {
-      "Version": "8.7.36.923",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3Obmr1B"
-    },
-    {
-      "Version": "8.7.36.923",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3MP8sNQ"
-    },
-    {
-      "Version": "8.7.44.968",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3aHClmz"
-    },
-    {
-      "Version": "8.7.44.968",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3Ppiozw"
-    },
-    {
-      "Version": "8.7.48.1062",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3BdlxOS"
-    },
-    {
-      "Version": "8.7.48.1062",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3cErE4t"
-    },
-    {
       "Version": "8.7.62.398",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3B3dX84"
+      "Link": "https://bit.ly/3Vz3Uk0"
     },
     {
       "Version": "8.7.62.398",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3xcmu7c"
+      "Link": "https://bit.ly/3XWS84n"
     },
     {
       "Version": "8.7.70.553",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3CmXooa"
+      "Link": "https://bit.ly/3uoAt8n"
     },
     {
       "Version": "8.7.70.553",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3SSIzki"
+      "Link": "https://bit.ly/3FqRrcw"
     },
     {
       "Version": "8.7.78.373",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3foMve1"
+      "Link": "https://bit.ly/3VCURPe"
     },
     {
       "Version": "8.7.78.373",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3zxWNze"
-    }
+      "Link": "https://bit.ly/3P3H9SL"
+    },
+    {
+      "Version": "8.7.88.496",
+      "Arch": "ARM64-V8A",
+      "Link": "https://bit.ly/3F9cNtt"
+    },
+    {
+      "Version": "8.7.88.496",
+      "Arch": "ARMEABI-V7A",
+      "Link": "https://bit.ly/3P6Fhc7"
+    },
   ],
   "Amoled_Cloned": [
     {
-      "Version": "8.7.04.1056",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3NiypGN"
-    },
-    {
-      "Version": "8.7.04.1056",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3NksXmK"
-    },
-    {
-      "Version": "8.7.10.1262",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3aCcnjL"
-    },
-    {
-      "Version": "8.7.10.1262",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3NMZOAy"
-    },
-    {
-      "Version": "8.7.20.1261",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3xubYIb"
-    },
-    {
-      "Version": "8.7.20.1261",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3xklT44"
-    },
-    {
-      "Version": "8.7.30.1221",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3aJPBXp"
-    },
-    {
-      "Version": "8.7.30.1221",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3NYLDZ0"
-    },
-    {
-      "Version": "8.7.36.923",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3zAS0hu"
-    },
-    {
-      "Version": "8.7.36.923",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/39mFKqe"
-    },
-    {
-      "Version": "8.7.44.968",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3yGj9gE"
-    },
-    {
-      "Version": "8.7.44.968",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3aJ6phF"
-    },
-    {
-      "Version": "8.7.48.1062",
-      "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3cMOfvX"
-    },
-    {
-      "Version": "8.7.48.1062",
-      "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3zSWAHL"
-    },
-    {
       "Version": "8.7.62.398",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3d2jR11"
+      "Link": "https://bit.ly/3H9cvp7"
     },
     {
       "Version": "8.7.62.398",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3SbnLnt"
+      "Link": "https://bit.ly/3B7XVur"
     },
     {
       "Version": "8.7.70.553",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3VlbkHN"
+      "Link": "https://bit.ly/3UtHGPa"
     },
     {
       "Version": "8.7.70.553",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3TsEyTF"
+      "Link": "https://bit.ly/3UAyJ6y"
     },
     {
       "Version": "8.7.78.373",
       "Arch": "ARM64-V8A",
-      "Link": "https://bit.ly/3gZABYD"
+      "Link": "https://bit.ly/3F4c4tJ"
     },
     {
       "Version": "8.7.78.373",
       "Arch": "ARMEABI-V7A",
-      "Link": "https://bit.ly/3Wi0rai"
-    }
+      "Link": "https://bit.ly/3uoTg3q"
+    },
+    {
+      "Version": "8.7.88.496",
+      "Arch": "ARM64-V8A",
+      "Link": "https://bit.ly/3uCdXc0"
+    },
+    {
+      "Version": "8.7.88.496",
+      "Arch": "ARMEABI-V7A",
+      "Link": "https://bit.ly/3PcT2Wz"
+    },
   ],
+  
   "Mod_Changelogs": [
-    {
-      "Mod_Changelogs": "SPOTIFY 8.7.04.1056 [OLD RELEASE]\n\n•Re-added Enhance Playlist Feature\n•Re-added Stock Now Playing Bar\n•Re-added Stock Podcast NPB\n•Added Anchors (Only works for tracks with Lyrics and Storylines)\n•Add to Queue Bug Fixed\n•Various Internal Bug Fixed"
-    },
-    {
-      "Mod_Changelogs": "SPOTIFY 8.7.10.1262 [OLD RELEASE]\n\n•Added Swipe to Add Queue (Playlist Only)\n•Micdrop Reworked\n•Android 6 Rollback\n•Assorted Bug Fixed from Previous Build"
-    },
-    {
-      "Mod_Changelogs": "SPOTIFY 8.7.20.1261 [OLD RELEASE]\n\n•Added Quick Settings Feature\n•Added Artist NFT Section\n•New Lyrics UI (with Sing/Micdrop Feature)\n•New Track Sharing UI (Version 2)\n•Updated Ad Blockers\n•Removed Artist Separate Shuffle (Server-Sided)\n•Removed Subscription Checks (Faster Load Times)\n•Bug Fixes from Previous Build"
-    },
-    {
-      "Mod_Changelogs": "SPOTIFY 8.7.30.1221 [OLD RELEASE]\n\n•Forced Disabled New Playing Feature (Ugly A/B UI)\n•Some New A/B Features Added\n•Artist Page's Separate Shuffle Readded\n•Some Older A/B Features Went Missing/Removed\n•Some Fixes and Tweakings from the Previous Mod Build"
-    },
-    {
-      "Mod_Changelogs": "SPOTIFY 8.7.36.923 [OLD RELEASE]\n\n•Added Spotify Enhance Playlists Feature\n•Fixed Slow Album Load Time\n•Some Bugs Fixed and Minor Improvements"
-    },
-    {
-      "Mod_Changelogs": "SPOTIFY 8.7.44.968 [OLD RELEASE]\n\n•Some Bugs Fixed and Minor Improvements"
-    },
-    {
-      "Mod_Changelogs": "SPOTIFY 8.7.48.1062 [OLD RELEASE]\n\n•Added New Overlay Navigation [A/B Feature] (Music and Show/Podcast)\n•Added New Now Playing UI [A/B Feature] (Version 2)\n•Added Jump Videos [A/B Feature] (NPUI Canvas)\n•Added Record Episode [A/B Feature] (Can be seen beside the 'Download')\n•Added Live Events - New UI with Settings [Public Feature]\n•Subscription Patched Reworked\n•Advertisements Patched Reworked\n•Fixed Track/Album/Playlist Image Cover\n•Fixed Track/Album/Playlist Empty Bug\n•Fixed Missing Now Playing Bar Bug (Sort Of)\n•More Bugs Fixed, Minor Tweaks, Load Times and Stability Improvements"
-    },
-    {
-      "Mod_Changelogs": "SPOTIFY 8.7.62.398 [OLD RELEASE]\n\n•Liked Songs Enhance [A/B Feature]\n•New Sharing UI [A/B Feature] (with Edit)\n•New Lyrics Sharing [A/B Feature] (with Customization)\n•More Bugs Fixed, Minor Tweaks, Load Times and Stability Improvements"
-    },
-    {
-      "Mod_Changelogs": "SPOTIFY 8.7.70.553 [OLD RELEASE]\n\n•Watch Feed - Discover Weekly Playlist (Shorts/Reels) [A/B Feature]\n•Spotify Playlist Video Feature Reworked [A/B Feature]\n•Track Sharing Reworked (Stocked) [A/B Feature]\n•Storyline Reworked [A/B Feature]\n•Podcast and Show Languages [A/B Feature]\n•App Language [A/B Feature]"
-    },
-    {
-      "Mod_Changelogs": "SPOTIFY 8.7.78.373 [NEW RELEASE]\n\n•Stock UI (Voted by the community)\n•Ad-Free Podcast (New)\n•Modified Audio, Video, Banner, Visuals Ads Removal (Reworked)"
-    }
-  ]
+        {
+            "Mod_Changelogs": "SPOTIFY 8.7.62.398 [OLD RELEASE]\n\n•Liked Songs Enhance [A/B Feature]\n•New Sharing UI [A/B Feature] (with Edit)\n•New Lyrics Sharing [A/B Feature] (with Customization)\n•More Bugs Fixed, Minor Tweaks, Load Times and Stability Improvements"
+        },
+        {
+            "Mod_Changelogs": "SPOTIFY 8.7.70.553 [OLD RELEASE]\n\n•Watch Feed - Discover Weekly Playlist (Shorts/Reels) [A/B Feature]\n•Spotify Playlist Video Feature Reworked [A/B Feature]\n•Track Sharing Reworked (Stocked) [A/B Feature]\n•Storyline Reworked [A/B Feature]\n•Podcast and Show Languages [A/B Feature]\n•App Language [A/B Feature]"
+        },
+        {
+            "Mod_Changelogs": "SPOTIFY 8.7.78.373 [OLD RELEASE]\n\n•Stock UI (Voted by the community)\n•Ad-Free Podcast (New)\n•Modified Audio, Video, Banner, Visuals Ads Removal (Reworked)"
+        },
+        {
+            "Mod_Changelogs": "SPOTIFY 8.7.88.496 [NEW RELEASE]\n\n•Beta UI (Version 2) [A/B Feature]\n•Rounded Corner Image [A/B Feature]\n•NP Navigation Context Header [A/B Feature]\n•Search Artist Row Play Button [A/B Feature]\n•Minor Bugs Fixed"
+        }
+    ]
 }
