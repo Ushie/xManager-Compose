@@ -15,6 +15,7 @@ import com.xinto.taxi.Taxi
 import com.xinto.taxi.rememberBackstackNavigator
 import dev.ushiekane.xmanager.ui.navigation.AppDestination
 import dev.ushiekane.xmanager.ui.screen.HomeScreen
+import dev.ushiekane.xmanager.ui.screen.SettingsScreen
 import dev.ushiekane.xmanager.ui.theme.XManagerTheme
 
 class MainActivity : ComponentActivity() {

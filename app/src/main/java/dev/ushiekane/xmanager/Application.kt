@@ -10,7 +10,7 @@ class Application : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@Application)
-            modules(httpModule, viewModelModule, repositoryModule)
+            modules(httpModule, preferencesModule, viewModelModule, repositoryModule)
         }
     }
 }
