@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "dev.ushiekane.xmanager"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "0.0.1"
@@ -48,33 +48,31 @@ dependencies {
 
     implementation("androidx.activity:activity-compose:1.7.0-alpha02")
 
-    val composeVersion = "1.4.0-alpha01"
+    val composeVersion = "1.4.0-alpha03"
     implementation("androidx.compose.ui:ui:${composeVersion}")
-    implementation("androidx.compose.material3:material3:1.1.0-alpha01")
+    implementation("androidx.compose.material3:material3:1.1.0-alpha03")
     implementation("androidx.compose.material:material-icons-extended:${composeVersion}")
 
     // Accompanist
-    val accompanistVersion = "0.27.0"
+    val accompanistVersion = "0.28.0"
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
 
     // Taxi (navigation)
     implementation("com.github.X1nto:Taxi:1.2.0")
 
     // Koin
-    val koinVersion = "3.3.0"
+    val koinVersion = "3.3.2"
     implementation("io.insert-koin:koin-android:$koinVersion")
-    implementation("io.insert-koin:koin-androidx-compose:3.3.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.1")
 
-    // KotlinX
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    // Ktor
+    val ktorVersion = "2.2.2"
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
-    // Networking
-    implementation("com.vk.knet:core:1.0")
-    implementation("com.vk.knet:cronet:1.0")
-    implementation("com.vk.knet:okcronet:1.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
-    debugImplementation("androidx.compose.ui:ui-tooling:${composeVersion}")
-    implementation("androidx.compose.material3:material3:1.1.0-alpha01")
     implementation("androidx.compose.material:material-icons-extended:${composeVersion}")
     implementation("androidx.core:core-splashscreen:1.0.0")
 }

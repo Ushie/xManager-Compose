@@ -22,7 +22,7 @@ fun SocialCard(label: String, @DrawableRes icon: Int) {
         modifier = Modifier
             .padding(bottom = 6.dp)
             .width(95.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF212121))
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF191919))
     ) {
         Column(
             Modifier.padding(12.dp),
@@ -60,7 +60,7 @@ fun SocialCard(label: String, icon: ImageVector) {
         modifier = Modifier
             .padding(bottom = 6.dp)
             .width(95.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF212121))
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF191919))
     ) {
         Column(
             Modifier.padding(12.dp),

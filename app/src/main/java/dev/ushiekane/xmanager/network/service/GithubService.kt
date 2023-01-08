@@ -1,22 +1,21 @@
 package dev.ushiekane.xmanager.network.service
 
-import com.vk.knet.core.Knet
 import dev.ushiekane.xmanager.domain.dto.Release
-import dev.ushiekane.xmanager.util.body
-import dev.ushiekane.xmanager.util.get
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.request.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
 
 
-class GithubService(private val client: Knet, private val json: Json) {
+class GithubService(private val client: HttpClient) {
 
     suspend fun fetchReleases(): Release = withContext(Dispatchers.IO) {
-        client.get(apiUrl).body(json)
+        client.get(apiUrl).body()
     }
 
     private companion object {
         private const val apiUrl =
-            "https://raw.githubusercontent.com/xManager-v2/xManager-Spotify-Core/main/api/public.json"
+            "https://raw.githubusercontent.com/Ushie/xManager-Compose/main/api.json"
     }
 }

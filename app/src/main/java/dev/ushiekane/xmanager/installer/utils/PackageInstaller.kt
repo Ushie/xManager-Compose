@@ -1,36 +1,13 @@
-package dev.ushiekane.xmanager.util
+package dev.ushiekane.xmanager.installer.utils
 
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
-import android.provider.Settings
-import android.widget.Toast
-import androidx.core.net.toUri
-import dev.ushiekane.xmanager.installer.AppInstallService
-import dev.ushiekane.xmanager.installer.AppUninstallService
+import dev.ushiekane.xmanager.installer.service.AppInstallService
 import java.io.File
-
-fun Context.openUrl(url: String) {
-    startActivity(Intent(Intent.ACTION_VIEW, url.toUri()).apply {
-        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-    })
-}
-fun Context.openAppInfo(pkg: String) {
-    startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-        data = Uri.parse("package:" + pkg)
-        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-    })
-}
-fun Context.openApp(pkg: String) = startActivity(packageManager.getLaunchIntentForPackage(pkg))
-
-fun Context.deleteCache() {
-    cacheDir.deleteRecursively()
-    Toast.makeText(this, "Successfully deleted!", Toast.LENGTH_SHORT).show()
-}
 
 val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
     PendingIntent.FLAG_MUTABLE
@@ -60,8 +37,3 @@ fun Context.install(apk: File) {
     )
     session.close()
 }
-fun Context.uninstall(name: String) = packageManager.packageInstaller.uninstall(
-    name, PendingIntent.getService(
-        this, 0, Intent(this, AppUninstallService::class.java), intent
-    ).intentSender
-)

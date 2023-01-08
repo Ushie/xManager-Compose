@@ -27,7 +27,7 @@ fun InfoCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 10.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF212121))
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF191919))
     ) {
         Column(
             modifier = Modifier.clickable { expandedState = !expandedState }) {

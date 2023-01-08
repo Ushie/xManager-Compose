@@ -3,6 +3,12 @@ package dev.ushiekane.xmanager.domain.dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+interface SpotifyRelease {
+    val version: String
+    val arch: String
+    val downloadUrl: String
+}
+
 @Serializable
 class Release(
     @SerialName("Regular_Latest") val latest: String,
@@ -18,24 +24,28 @@ class Release(
 ) {
     @Serializable
     data class NormalReleases(
-        @SerialName("Title") val name: String,
-        @SerialName("Link") val downloadUrl: String
-    )
+        @SerialName("Version") override val version: String,
+        @SerialName("Arch") override val arch: String,
+        @SerialName("Link") override val downloadUrl: String
+    ): SpotifyRelease
     @Serializable
     data class AmoledReleases(
-        @SerialName("Title") val name: String,
-        @SerialName("Link") val downloadUrl: String
-    )
+        @SerialName("Version") override val version: String,
+        @SerialName("Arch") override val arch: String,
+        @SerialName("Link") override val downloadUrl: String
+    ): SpotifyRelease
     @Serializable
     data class NormalClonedReleases(
-        @SerialName("Title") val name: String,
-        @SerialName("Link") val downloadUrl: String
-    )
+        @SerialName("Version") override val version: String,
+        @SerialName("Arch") override val arch: String,
+        @SerialName("Link") override val downloadUrl: String
+    ): SpotifyRelease
     @Serializable
     data class AmoledClonedReleases(
-        @SerialName("Title") val name: String,
-        @SerialName("Link") val downloadUrl: String
-    )
+        @SerialName("Version") override val version: String,
+        @SerialName("Arch") override val arch: String,
+        @SerialName("Link") override val downloadUrl: String
+    ): SpotifyRelease
     @Serializable
     data class Changelogs(
         @SerialName("Mod_Changelogs") val changelog: String,
