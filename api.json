@@ -3,7 +3,6 @@
   "Amoled_Latest": "8.7.88.496",
   "RC_Latest": "8.7.88.496",
   "ABC_Latest": "8.7.88.496",
-  "Lite_Latest": "1.9.0.25719",
   "App_Changelogs": "•Migrated from MaterialComponents to Material You (M3)\n•Added Mirror Links (To avoid abuse)\n•Added Serbian (Cyrillic) Translation (Thanks nexiRS!)\n•Added Serbian (Latin) Translation (Thanks nexiRS!)\n•Updated Copy Url Link (Mirror Link by default)\n•Updated Telegram Link\n•Reworked Alert and Progress Dialog\n•Fixed Alert Dialog Bug (Expanding after idle)\n•Fixed Reminder Notification (Causes java.lang.NoSuchMethodError)\n•Other Layouts and Texts Adjusted\n•Minor Bugs Fixed, Optimizations and Improvements",
   "Supporters": "Ricardo G.\nAakarshit U.\nAmaricai A.\nAntonio M.\nJuleshwar Babu T.M.\nYash G.\nCamille D.\nAnudeep N.D.\nKrzysztof S.\nAlex C.\nCarlos C.\nPrabandaru P.\nRussel R.\nLucha G.S.\nAleksandrs F.\nGeorgios H.\nLevente T.\nFahim Fahim | Z.\nQuiet\nMikaël V.\nShem W.\nCatalin P.\nPhilipp J.\nKristian H.\nLandon P.\nJay W.\nMichael P.\nAditya C.\nTyler H.\nJose Nayar A.C.\nJohn Carlo R.M.\nAngel G.\nMarijn B.\nMiguel Filipe M.F.\nCristobal Ruiz G.\nMichael P.\nSiva Sri H.M.\nEli S.\nFaris D.\nAshesh S.\nDaniel F.\nSandis Z.\nMohammed M.\nPaul M.\nEyner A.O.F.\nSiyanda M.\nLehi W.\nKonstantin S.\nSimon L.\nSeth C.\nAhmad Husaini B.S.\nNicola D.\nFelipe S.\nShay B.",
   "Rewarded_Ads": "ca-app-pub-3319548483346434/5639572396",
@@ -49,7 +48,7 @@
       "Version": "8.7.88.496",
       "Arch": "ARMEABI-V7A",
       "Link": "https://bit.ly/3UuWAo9"
-    },
+    }
   ],
   "Amoled": [
     {
@@ -91,7 +90,7 @@
       "Version": "8.7.88.496",
       "Arch": "ARMEABI-V7A",
       "Link": "https://bit.ly/3W00yq1"
-    },
+    }
   ],
   "Regular_Cloned": [
     {
@@ -133,7 +132,7 @@
       "Version": "8.7.88.496",
       "Arch": "ARMEABI-V7A",
       "Link": "https://bit.ly/3P6Fhc7"
-    },
+    }
   ],
   "Amoled_Cloned": [
     {
@@ -175,7 +174,7 @@
       "Version": "8.7.88.496",
       "Arch": "ARMEABI-V7A",
       "Link": "https://bit.ly/3PcT2Wz"
-    },
+    }
   ],
   
   "Mod_Changelogs": [
