@@ -14,4 +14,7 @@ import kotlinx.parcelize.RawValue
 sealed interface AppDestination : Destination {
     @Parcelize
     object Home : AppDestination
+
+    @Parcelize
+    object Settings : AppDestination
 }

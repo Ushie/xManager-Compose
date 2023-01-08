@@ -39,7 +39,10 @@ class MainActivity : ComponentActivity() {
                 ) { destination ->
                     when (destination) {
                         is AppDestination.Home -> HomeScreen(
-                            onClickSettings = { /* TODO */ }
+                            onClickSettings = { navigator.push(AppDestination.Settings) }
+                        )
+                        is AppDestination.Settings -> SettingsScreen(
+                            navigator = navigator
                         )
                     }
                 }
