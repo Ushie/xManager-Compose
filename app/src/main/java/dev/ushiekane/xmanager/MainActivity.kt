@@ -10,6 +10,7 @@ import dev.olshevski.navigation.reimagined.NavBackHandler
 import dev.olshevski.navigation.reimagined.rememberNavController
 import dev.ushiekane.xmanager.ui.navigation.AppDestination
 import dev.ushiekane.xmanager.ui.screen.HomeScreen
+import dev.ushiekane.xmanager.ui.screen.SettingsScreen
 import dev.ushiekane.xmanager.ui.theme.XManagerTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +29,10 @@ class MainActivity : ComponentActivity() {
                     @Suppress("USELESS_IS_CHECK") // Settings page isn't added yet
                     when (destination) {
                         is AppDestination.Home -> HomeScreen(
-                            onClickSettings = { /* TODO */ }
+                            onClickSettings = { navigator.push(AppDestination.Settings) }
+                        )
+                        is AppDestination.Settings -> SettingsScreen(
+                            navigator = navigator
                         )
                     }
                 }
