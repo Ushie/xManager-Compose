@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -57,4 +58,7 @@ dependencies {
     // Koin (for DI)
     implementation("io.insert-koin:koin-android:3.3.2")
     implementation("io.insert-koin:koin-androidx-compose:3.4.1")
+
+    // Compose Navigation
+    implementation("dev.olshevski.navigation:reimagined:1.3.1")
 }
