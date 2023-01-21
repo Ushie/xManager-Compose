@@ -54,4 +54,7 @@ dependencies {
     // Material 3
     implementation("androidx.compose.material3:material3:1.1.0-alpha04")
 
+    // Koin (for DI)
+    implementation("io.insert-koin:koin-android:3.3.2")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.1")
 }
