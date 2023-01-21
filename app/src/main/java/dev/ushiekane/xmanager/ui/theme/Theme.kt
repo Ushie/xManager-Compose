@@ -55,3 +55,8 @@ fun XManagerTheme(
         content = content
     )
 }
+enum class Theme {
+    SYSTEM,
+    LIGHT,
+    DARK;
+}

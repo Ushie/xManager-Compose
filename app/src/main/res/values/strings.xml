@@ -2,4 +2,6 @@
     <string name="app_name">XManager</string>
     <string name="home">Home</string>
     <string name="settings">Settings</string>
+    <string name="invalid_location">Download location is invalid, so it has been reset to default.</string>
+    <string name="cache_clean_successful">Successfully cleaned cache!</string>
 </resources>
