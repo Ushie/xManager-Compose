@@ -3,51 +3,101 @@ package dev.ushiekane.xmanager.domain.dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-interface SpotifyRelease {
+interface Release {
     val version: String
-    val arch: String
     val downloadUrl: String
+    val downloadUrl2: String
+    val downloadUrl3: String
 }
 
+interface AmoledRelease: Release
+
+interface StockRelease: Release
+
+interface ClonedRelease: Release
+
+interface ExperimentalRelease: Release
+
 @Serializable
-class Release(
-    @SerialName("Regular_Latest") val latest: String,
-    @SerialName("Amoled_Latest") val amoledLatest: String,
-    @SerialName("RC_Latest") val latestCloned: String,
-    @SerialName("ABC_Latest") val amoledLatestCloned: String,
+class Response(
     @SerialName("App_Changelogs") val appChangelogs: String,
-    @SerialName("Regular") val releases: List<NormalReleases>,
-    @SerialName("Amoled") val amoledReleases: List<AmoledReleases>,
-    @SerialName("Regular_Cloned") val clonedReleases: List<NormalClonedReleases>,
-    @SerialName("Amoled_Cloned") val amoledClonedReleases: List<AmoledClonedReleases>,
-    @SerialName("Mod_Changelogs") val modChangelogs: List<Changelogs>,
-) {
-    @Serializable
-    data class NormalReleases(
-        @SerialName("Version") override val version: String,
-        @SerialName("Arch") override val arch: String,
-        @SerialName("Link") override val downloadUrl: String
-    ): SpotifyRelease
-    @Serializable
-    data class AmoledReleases(
-        @SerialName("Version") override val version: String,
-        @SerialName("Arch") override val arch: String,
-        @SerialName("Link") override val downloadUrl: String
-    ): SpotifyRelease
-    @Serializable
-    data class NormalClonedReleases(
-        @SerialName("Version") override val version: String,
-        @SerialName("Arch") override val arch: String,
-        @SerialName("Link") override val downloadUrl: String
-    ): SpotifyRelease
-    @Serializable
-    data class AmoledClonedReleases(
-        @SerialName("Version") override val version: String,
-        @SerialName("Arch") override val arch: String,
-        @SerialName("Link") override val downloadUrl: String
-    ): SpotifyRelease
-    @Serializable
-    data class Changelogs(
-        @SerialName("Mod_Changelogs") val changelog: String,
-    )
-}
+    @SerialName("Stock_Patched") val stockReleases: List<Stock>,
+    @SerialName("Amoled_Patched") val amoledReleases: List<Amoled>,
+    @SerialName("Stock_Cloned_Patched") val clonedReleases: List<StockCloned>,
+    @SerialName("Amoled_Cloned_Patched") val amoledClonedReleases: List<AmoledCloned>,
+    @SerialName("Stock_Experimental_Patched") val experimentalReleases: List<StockExperimental>,
+    @SerialName("Amoled_Experimental_Patched") val amoledExperimentalReleases: List<AmoledExperimental>,
+    @SerialName("Stock_Experimental_Cloned_Patched") val clonedExperimentalReleases: List<StockClonedExperimental>,
+    @SerialName("Amoled_Experimental_Cloned_Patched") val amoledClonedExperimentalReleases: List<AmoledClonedExperimental>,
+    @SerialName("Lite_Patched") val liteReleases: List<Lite>,
+    @SerialName("Patched_Changelogs") val changelogs: List<Changelogs>,
+)
+
+@Serializable
+data class Stock(
+    @SerialName("Title") override val version: String,
+    @SerialName("Link_1") override val downloadUrl: String,
+    @SerialName("Link_2") override val downloadUrl2: String,
+    @SerialName("Link_3") override val downloadUrl3: String
+): StockRelease
+@Serializable
+data class Amoled(
+    @SerialName("Title") override val version: String,
+    @SerialName("Link_1") override val downloadUrl: String,
+    @SerialName("Link_2") override val downloadUrl2: String,
+    @SerialName("Link_3") override val downloadUrl3: String
+): AmoledRelease
+@Serializable
+data class StockCloned(
+    @SerialName("Title") override val version: String,
+    @SerialName("Link_1") override val downloadUrl: String,
+    @SerialName("Link_2") override val downloadUrl2: String,
+    @SerialName("Link_3") override val downloadUrl3: String
+): StockRelease, ClonedRelease
+@Serializable
+data class AmoledCloned(
+    @SerialName("Title") override val version: String,
+    @SerialName("Link_1") override val downloadUrl: String,
+    @SerialName("Link_2") override val downloadUrl2: String,
+    @SerialName("Link_3") override val downloadUrl3: String
+): AmoledRelease, ClonedRelease
+@Serializable
+data class StockExperimental(
+    @SerialName("Title") override val version: String,
+    @SerialName("Link_1") override val downloadUrl: String,
+    @SerialName("Link_2") override val downloadUrl2: String,
+    @SerialName("Link_3") override val downloadUrl3: String
+): StockRelease, ExperimentalRelease
+@Serializable
+data class AmoledExperimental(
+    @SerialName("Title") override val version: String,
+    @SerialName("Link_1") override val downloadUrl: String,
+    @SerialName("Link_2") override val downloadUrl2: String,
+    @SerialName("Link_3") override val downloadUrl3: String
+): AmoledRelease, ExperimentalRelease
+
+@Serializable
+data class StockClonedExperimental(
+    @SerialName("Title") override val version: String,
+    @SerialName("Link_1") override val downloadUrl: String,
+    @SerialName("Link_2") override val downloadUrl2: String,
+    @SerialName("Link_3") override val downloadUrl3: String
+): StockRelease, ClonedRelease, ExperimentalRelease
+@Serializable
+data class AmoledClonedExperimental(
+    @SerialName("Title") override val version: String,
+    @SerialName("Link_1") override val downloadUrl: String,
+    @SerialName("Link_2") override val downloadUrl2: String,
+    @SerialName("Link_3") override val downloadUrl3: String
+): AmoledRelease, ClonedRelease, ExperimentalRelease
+@Serializable
+data class Lite(
+    @SerialName("Title") override val version: String,
+    @SerialName("Link_1") override val downloadUrl: String,
+    @SerialName("Link_2") override val downloadUrl2: String,
+    @SerialName("Link_3") override val downloadUrl3: String
+): Release
+@Serializable
+data class Changelogs(
+    @SerialName("Patched_Changelogs") val changelog: String,
+)

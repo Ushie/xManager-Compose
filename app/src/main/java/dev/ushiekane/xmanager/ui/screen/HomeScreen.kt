@@ -25,7 +25,8 @@ import org.koin.androidx.compose.getViewModel
 fun HomeScreen(
     onClickSettings: () -> Unit, vm: HomeViewModel = getViewModel()
 ) {
-    Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
+    Scaffold(
+        modifier = Modifier.fillMaxSize(), topBar = {
         TopAppBar(title = {
             Text(
                 text = "xManager"
@@ -40,12 +41,12 @@ fun HomeScreen(
             is Status.Downloading -> {
                 DownloadingDialog(
                     onDismiss = vm::cancel,
-                    onFixer = { vm.fixer(vm.selectedRelease!!) },
+                    onFixer = vm::fixer,
                     onCancel = vm::cancel,
-                    progress = vm.progress.toDouble().div(100).toFloat(),
+                    progress = vm.percentage.toDouble().div(100).toFloat(),
                     downloaded = vm.downloaded,
                     total = vm.total,
-                    percentage = vm.progress,
+                    percentage = vm.percentage,
                 )
             }
             is Status.Successful -> {
@@ -55,18 +56,15 @@ fun HomeScreen(
             }
             is Status.Confirm -> {
                 ConfirmDialog(
-                    onDismiss = vm::hideDialog,
+                    onDismiss = {  },
                     onDownload = vm::startDownload,
                     onCopy = { vm.copyToClipboard(vm.selectedRelease!!) },
-                    latest = vm.isLatest,
-                    isAmoled = vm.isAmoled,
-                    releaseArch = vm.selectedRelease!!.arch,
-                    releaseVersion = vm.selectedRelease!!.version,
+                    release = vm.selectedRelease!!
                 )
             }
             is Status.Existing -> {
                 ExistingDialog(
-                    onDismiss = vm::showConfirmDialog,
+                    onDismiss = {}, // TODO: guh
                     onClickDelete = vm::delete,
                     onInstall = vm::installApk
                 )
@@ -78,75 +76,26 @@ fun HomeScreen(
                 .padding(paddingValues)
                 .padding(8.dp, 18.dp, 8.dp, 8.dp)
         ) {
-            val uwu = false
-            ReleaseCard(title = "SPOTIFY (REGULAR)",
-                subtitle = "Unlimited skips, play on-demand, ad-free and new features!",
-                latest = vm.latestNormalRelease,
-                expandedContent = {
-                    if (uwu) {
-                        LazyColumn {
-                            vm.normalReleasesList.forEach {
-                                item {
-                                    Release(it.version,
-                                        it.arch,
-                                        it.downloadUrl,
-                                        it.version == vm.latestNormalRelease,
-                                        false,
-                                        onClick = { vm.checkIfExisting(it) },
-                                        onLongClick = { vm.openDownloadLink(it) })
-                                }
-                            }
-                        }
-                    } else {
-                        LazyColumn {
-                            vm.normalClonedReleasesList.forEach {
-                                item {
-                                    Release(it.version,
-                                        it.arch,
-                                        it.downloadUrl,
-                                        it.version == vm.latestNormalRelease,
-                                        false,
-                                        onClick = { vm.checkIfExisting(it) },
-                                        onLongClick = { vm.openDownloadLink(it) })
-                                }
-                            }
-                        }
-                    }
-                })
-            ReleaseCard(title = "SPOTIFY (AMOLED)",
-                subtitle = "Same features as regular but in amoled black version!",
-                latest = vm.latestAmoledRelease,
-                expandedContent = {
-                    if (uwu) {
-                        LazyColumn {
-                            vm.amoledReleasesList.forEach {
-                                item {
-                                    Release(it.version,
-                                        it.arch,
-                                        it.downloadUrl,
-                                        vm.amoledReleasesList.indexOf(it) == 0,
-                                        true,
-                                        onClick = { vm.checkIfExisting(it) },
-                                        onLongClick = { vm.openDownloadLink(it) })
-                                }
-                            }
-                        }
-                    } else {
-                        LazyColumn {
-                            vm.amoledClonedReleasesList.forEach {
-                                item {
-                                    Release(it.version,
-                                        it.arch,
-                                        it.downloadUrl,
-                                        vm.amoledClonedReleasesList.indexOf(it) == 0,
-                                        true,
-                                        onClick = { vm.checkIfExisting(it) },
-                                        onLongClick = { vm.openDownloadLink(it) })
-                                }
-                            }
-                        }
-                    }
-                })
+            val isCloned = false
+            val isExperimental = false
+            arrayOf(
+                if (isCloned) {
+                    Triple("STOCK CLONED PATCHED", "A cloned version of the stock patched", vm.stockClonedReleases)
+                    Triple("AMOLED CLONED PATCHED", "A cloned version of the stock patched with amoled black theme", vm.amoledClonedReleases)
+                } else if (isExperimental) {
+                    Triple("STOCK EXP PATCHED", "Experimental. New features. Unstable.", vm.stockExperimentalReleases)
+                    Triple("AMOLED EXP PATCHED", "Same experimental features but in amoled black theme. Unstable.", vm.amoledExperimentalReleases)
+                } else if (isExperimental && isCloned) {
+                    Triple("SE CLONED PATCHED", "Experimental cloned. Unstable", vm.stockClonedExperimentalReleases)
+                    Triple("AE CLONED PATCHED", "Same experimental cloned features. Unstable", vm.amoledClonedExperimentalReleases)
+                } else {
+                    Triple("STOCK PATCHED", "Ad free, Unlimited skips and play on-demand", vm.stockReleases)
+                    Triple("AMOLED PATCHED", "Same features but in amoled black theme", vm.amoledReleases)
+                },
+                Triple("LITE PATCHED", "An Ad free, Unlimited skips and play on-demand lightweight experience", vm.liteReleases )
+            ).forEach {
+                ReleaseCard(title = it.first, subtitle = it.second, releases = it.third, onClick = { vm.checkIfExists(it) }, onLongClick = { vm.openDownloadLink(it) })
+            }
             InfoCard {
                 LazyColumn {
                     vm.changeLog.forEach {

@@ -15,21 +15,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import dev.ushiekane.xmanager.domain.dto.Release
 import dev.ushiekane.xmanager.ui.theme.Typography
 
-
 @Composable
-fun ConfirmDialog(
+fun ConfirmDialog( // TODO: GUHHHHHHHHHHHHHHHHHHHHH
     onDismiss: () -> Unit,
     onDownload: () -> Unit,
     onCopy: () -> Unit,
-    latest: Boolean,
-    isAmoled: Boolean,
-    releaseArch: String,
-    releaseVersion: String,
+    release: Release
 ) {
-    val latestOrNot = if (latest) "LATEST VERSION" else "OLDER VERSION"
-    val amoled = if (isAmoled) "AMOLED" else "REGULAR"
+    val latestOrNot = if (true) "LATEST VERSION" else "OLDER VERSION"
+    val amoled = if (true) "AMOLED" else "REGULAR"
     Dialog(onDismissRequest = onDismiss) {
         Surface(
             color = Color(0xFF232323), shape = RoundedCornerShape(8.dp)
@@ -48,8 +45,8 @@ fun ConfirmDialog(
                     Spacer(Modifier.height(4.dp))
                     listOf(
                         Pair("RELEASE: ", latestOrNot),
-                        Pair("VERSION: ", releaseVersion),
-                        Pair("CPU/ARCH: ", releaseArch),
+                        Pair("VERSION: ", release.version),
+                        Pair("CPU/ARCH: ", ""),
                         Pair("PATCHED TYPE: ", amoled)
                     ).forEach { (first, second) ->
                         Text(buildAnnotatedString {

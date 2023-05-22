@@ -49,6 +49,7 @@ fun ToolsCard(
                             )
                         })
                     }
+
                     SETTINGS -> {
                         Popup(
                             title = "OPEN SETTINGS",
@@ -64,6 +65,7 @@ fun ToolsCard(
                                 )
                             })
                     }
+
                     UNINSTALL -> {
                         Popup(
                             title = "UNINSTALL PATCHED",
@@ -79,6 +81,11 @@ fun ToolsCard(
                                 )
                             })
                     }
+
+                    DELETE -> {
+                        onDelete().also { showDialog = NONE }
+                    }
+
                     NONE -> {}
                 }
                 Text(
@@ -94,41 +101,21 @@ fun ToolsCard(
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                IconButton(
-                    onClick = { showDialog = UNINSTALL }
-                ) {
-                    Icon(
-                        modifier = Modifier.size(28.dp),
-                        imageVector = Icons.Default.DeleteForever,
-                        contentDescription = null
-                    )
-                }
-                IconButton(
-                    onClick = { showDialog = SETTINGS }
-                ) {
-                    Icon(
-                        modifier = Modifier.size(28.dp),
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = null
-                    )
-                }
-                IconButton(
-                    onClick = onDelete
-                ) {
-                    Icon(
-                        modifier = Modifier.size(28.dp),
-                        imageVector = Icons.Default.Refresh,
-                        contentDescription = null
-                    )
-                }
-                IconButton(
-                    onClick = { showDialog = LAUNCH }
-                ) {
-                    Icon(
-                        modifier = Modifier.size(28.dp),
-                        imageVector = Icons.Default.Launch,
-                        contentDescription = null
-                    )
+                arrayOf(
+                    UNINSTALL to Icons.Default.DeleteForever,
+                    SETTINGS to Icons.Default.Settings,
+                    DELETE to Icons.Default.Refresh,
+                    LAUNCH to Icons.Default.Launch
+                ).forEach {
+                    IconButton(
+                        onClick = { showDialog = it.first }
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(28.dp),
+                            imageVector = it.second,
+                            contentDescription = null
+                        )
+                    }
                 }
             }
         }
@@ -139,5 +126,6 @@ private enum class Dialog {
     LAUNCH,
     SETTINGS,
     UNINSTALL,
+    DELETE,
     NONE
 }

@@ -17,21 +17,25 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.ushiekane.xmanager.R
+import dev.ushiekane.xmanager.domain.dto.Release
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Release(
-    releaseVersion: String,
-    releaseArch: String,
-    releaseLink: String,
+    release: Release,
     isLatest: Boolean,
     isAmoled: Boolean,
-    onClick: () -> Unit,
+    onClick: (Release) -> Unit,
     onLongClick: (String) -> Unit,
 ) {
-    Row(modifier = Modifier
-        .combinedClickable(onClick = onClick, onLongClick = { onLongClick(releaseLink) })
-        .padding(vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        modifier = Modifier
+            .combinedClickable(
+                onClick = { onClick(release) },
+                onLongClick = { onLongClick(release.downloadUrl) })
+            .padding(vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         if (isAmoled) {
             Icon(
                 modifier = Modifier.size(16.dp),
@@ -48,24 +52,14 @@ fun Release(
             )
         }
         Spacer(modifier = Modifier.width(4.dp))
-        if (isLatest) {
-            Text(
-                buildAnnotatedString {
-                    withStyle(style = SpanStyle(color = Color(0xFFFF1744))) {
-                        append("[LATEST] ")
-                    }
-                    append("$releaseVersion ($releaseArch)")
-                }, fontSize = 12.sp, fontWeight = FontWeight.Bold
-            )
-        } else {
-            Text(
-                buildAnnotatedString {
-                    withStyle(style = SpanStyle(color = Color(0xFFBDBDBD))) {
-                        append("[OLDER] ")
-                    }
-                    append("$releaseVersion ($releaseArch)")
-                }, fontSize = 12.sp, fontWeight = FontWeight.Bold
-            )
-        }
+
+        Text(
+            buildAnnotatedString {
+                withStyle(style = SpanStyle(color = Color(if (isLatest) 0xFFFF1744 else 0xFFBDBDBD))) {
+                    append(if (isLatest) "[LATEST] " else "[OLDER] ")
+                }
+                append("${release.version} (${""})")  // TODO: guh
+            }, fontSize = 12.sp, fontWeight = FontWeight.Bold
+        )
     }
 }
