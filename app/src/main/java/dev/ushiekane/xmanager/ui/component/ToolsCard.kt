@@ -16,10 +16,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.ushiekane.xmanager.ui.component.Dialog.*
 import dev.ushiekane.xmanager.util.clonedPackageName
+import dev.ushiekane.xmanager.util.litePackageName
 import dev.ushiekane.xmanager.util.packageName
 
 @Composable
-fun ToolsCard(
+fun ToolsCard( // TODO: refactor dis
     onLaunch: (String) -> Unit,
     onAppInfo: (String) -> Unit,
     onUninstall: (String) -> Unit,
@@ -47,6 +48,10 @@ fun ToolsCard(
                             onLaunch(
                                 clonedPackageName
                             )
+                        }, onClickLite = {
+                            onLaunch(
+                                litePackageName
+                            )
                         })
                     }
 
@@ -63,6 +68,10 @@ fun ToolsCard(
                                 onAppInfo(
                                     clonedPackageName
                                 )
+                            }, onClickLite = {
+                                onAppInfo(
+                                    litePackageName
+                                )
                             })
                     }
 
@@ -78,6 +87,10 @@ fun ToolsCard(
                             onClickCloned = {
                                 onUninstall(
                                     clonedPackageName
+                                )
+                            }, onClickLite = {
+                                onUninstall(
+                                    litePackageName
                                 )
                             })
                     }

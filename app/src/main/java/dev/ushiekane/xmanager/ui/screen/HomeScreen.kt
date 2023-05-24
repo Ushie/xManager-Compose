@@ -27,48 +27,49 @@ fun HomeScreen(
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(), topBar = {
-        TopAppBar(title = {
-            Text(
-                text = "xManager"
-            )
-        }, actions = {
-            IconButton(onClick = onClickSettings) {
-                Icon(imageVector = Icons.Default.Settings, contentDescription = null)
-            }
-        })
-    }) { paddingValues ->
+            TopAppBar(title = {
+                Text(
+                    text = "xManager"
+                )
+            }, actions = {
+                IconButton(onClick = onClickSettings) {
+                    Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                }
+            })
+        }) { paddingValues ->
         when (vm.status) {
             is Status.Downloading -> {
                 DownloadingDialog(
-                    onDismiss = vm::cancel,
-                    onFixer = vm::fixer,
-                    onCancel = vm::cancel,
+                    onDismiss = vm::dismissDialogAndCancel,
+                    onFixer = { vm.fixer(vm.selectedRelease!!) },
                     progress = vm.percentage.toDouble().div(100).toFloat(),
                     downloaded = vm.downloaded,
                     total = vm.total,
                     percentage = vm.percentage,
                 )
             }
+
             is Status.Successful -> {
+                val file = (vm.status as Status.Successful).file
                 SuccessDialog(
-                    onDismiss = vm::cancel, onInstall = vm::installApk
+                    onDismiss = vm::dismissDialogAndCancel, onInstall = { vm.installApk(file) },
                 )
             }
+
             is Status.Confirm -> {
                 ConfirmDialog(
-                    onDismiss = {  },
-                    onDownload = vm::startDownload,
-                    onCopy = { vm.copyToClipboard(vm.selectedRelease!!) },
+                    onDismiss = vm::dismissDialogAndCancel,
+                    onDownload = { vm.startDownload(vm.selectedRelease!!) },
                     release = vm.selectedRelease!!
                 )
             }
-            is Status.Existing -> {
-                ExistingDialog(
-                    onDismiss = {}, // TODO: guh
-                    onClickDelete = vm::delete,
-                    onInstall = vm::installApk
-                )
-            }
+            // is Status.Existing -> {
+            //     ExistingDialog(
+            //         onDismiss = vm::dismissDialogAndCancel,
+            //         onClickDelete = vm::delete,
+            //         onInstall = vm::installApk
+            //     )
+            // }
             else -> {}
         }
         Column(
@@ -79,22 +80,71 @@ fun HomeScreen(
             val isCloned = false
             val isExperimental = false
             arrayOf(
-                if (isCloned) {
-                    Triple("STOCK CLONED PATCHED", "A cloned version of the stock patched", vm.stockClonedReleases)
-                    Triple("AMOLED CLONED PATCHED", "A cloned version of the stock patched with amoled black theme", vm.amoledClonedReleases)
-                } else if (isExperimental) {
-                    Triple("STOCK EXP PATCHED", "Experimental. New features. Unstable.", vm.stockExperimentalReleases)
-                    Triple("AMOLED EXP PATCHED", "Same experimental features but in amoled black theme. Unstable.", vm.amoledExperimentalReleases)
-                } else if (isExperimental && isCloned) {
-                    Triple("SE CLONED PATCHED", "Experimental cloned. Unstable", vm.stockClonedExperimentalReleases)
-                    Triple("AE CLONED PATCHED", "Same experimental cloned features. Unstable", vm.amoledClonedExperimentalReleases)
-                } else {
-                    Triple("STOCK PATCHED", "Ad free, Unlimited skips and play on-demand", vm.stockReleases)
-                    Triple("AMOLED PATCHED", "Same features but in amoled black theme", vm.amoledReleases)
+                when {
+                    isCloned && isExperimental -> {
+                        Triple(
+                            "SE CLONED PATCHED",
+                            "Experimental cloned. Unstable",
+                            vm.stockClonedExperimentalReleases
+                        )
+                        Triple(
+                            "AE CLONED PATCHED",
+                            "Same experimental cloned features. Unstable",
+                            vm.amoledClonedExperimentalReleases
+                        )
+                    }
+
+                    isCloned -> {
+                        Triple(
+                            "STOCK CLONED PATCHED",
+                            "A cloned version of the stock patched",
+                            vm.stockClonedReleases
+                        )
+                        Triple(
+                            "AMOLED CLONED PATCHED",
+                            "A cloned version of the stock patched with amoled black theme",
+                            vm.amoledClonedReleases
+                        )
+                    }
+
+                    isExperimental -> {
+                        Triple(
+                            "STOCK EXP PATCHED",
+                            "Experimental. New features. Unstable.",
+                            vm.stockExperimentalReleases
+                        )
+                        Triple(
+                            "AMOLED EXP PATCHED",
+                            "Same experimental features but in amoled black theme. Unstable.",
+                            vm.amoledExperimentalReleases
+                        )
+                    }
+
+                    else -> {
+                        Triple(
+                            "STOCK PATCHED",
+                            "Ad free, Unlimited skips and play on-demand",
+                            vm.stockReleases
+                        )
+                        Triple(
+                            "AMOLED PATCHED",
+                            "Same features but in amoled black theme",
+                            vm.amoledReleases
+                        )
+                    }
                 },
-                Triple("LITE PATCHED", "An Ad free, Unlimited skips and play on-demand lightweight experience", vm.liteReleases )
-            ).forEach {
-                ReleaseCard(title = it.first, subtitle = it.second, releases = it.third, onClick = { vm.checkIfExists(it) }, onLongClick = { vm.openDownloadLink(it) })
+                Triple(
+                    "LITE PATCHED",
+                    "An Ad free, Unlimited skips and play on-demand lightweight experience",
+                    vm.liteReleases
+                )
+            ).forEach { triple ->
+                ReleaseCard(
+                    title = triple.first,
+                    subtitle = triple.second,
+                    releases = triple.third,
+                    onClick = { vm.confirmDialog(it) },
+                    onLongClick = { vm.openDownloadLink(it) })
             }
             InfoCard {
                 LazyColumn {

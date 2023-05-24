@@ -1,9 +1,22 @@
 package dev.ushiekane.xmanager.ui.component
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -15,18 +28,37 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import dev.ushiekane.xmanager.domain.dto.Amoled
+import dev.ushiekane.xmanager.domain.dto.AmoledCloned
+import dev.ushiekane.xmanager.domain.dto.AmoledClonedExperimental
+import dev.ushiekane.xmanager.domain.dto.AmoledExperimental
+import dev.ushiekane.xmanager.domain.dto.Lite
 import dev.ushiekane.xmanager.domain.dto.Release
+import dev.ushiekane.xmanager.domain.dto.Stock
+import dev.ushiekane.xmanager.domain.dto.StockCloned
+import dev.ushiekane.xmanager.domain.dto.StockClonedExperimental
+import dev.ushiekane.xmanager.domain.dto.StockExperimental
 import dev.ushiekane.xmanager.ui.theme.Typography
 
 @Composable
-fun ConfirmDialog( // TODO: GUHHHHHHHHHHHHHHHHHHHHH
+fun ConfirmDialog(
     onDismiss: () -> Unit,
     onDownload: () -> Unit,
-    onCopy: () -> Unit,
     release: Release
 ) {
-    val latestOrNot = if (true) "LATEST VERSION" else "OLDER VERSION"
-    val amoled = if (true) "AMOLED" else "REGULAR"
+    val type =
+        when (release) {
+            is Amoled -> "AMOLED"
+            is Stock -> "STOCK"
+            is StockCloned -> "STOCK CLONED"
+            is AmoledCloned -> "AMOLED CLONED"
+            is StockExperimental -> "EXPERIMENTAL"
+            is AmoledExperimental -> "EXPERIMENTAL AMOLED"
+            is StockClonedExperimental -> "EXPERIMENTAL STOCK CLONED"
+            is AmoledClonedExperimental -> "EXPERIMENTAL AMOLED CLONED"
+            is Lite -> "LITE"
+            else -> "UNKNOWN"
+        }
     Dialog(onDismissRequest = onDismiss) {
         Surface(
             color = Color(0xFF232323), shape = RoundedCornerShape(8.dp)
@@ -44,10 +76,8 @@ fun ConfirmDialog( // TODO: GUHHHHHHHHHHHHHHHHHHHHH
                     )
                     Spacer(Modifier.height(4.dp))
                     listOf(
-                        Pair("RELEASE: ", latestOrNot),
                         Pair("VERSION: ", release.version),
-                        Pair("CPU/ARCH: ", ""),
-                        Pair("PATCHED TYPE: ", amoled)
+                        Pair("PATCHED TYPE: ", type)
                     ).forEach { (first, second) ->
                         Text(buildAnnotatedString {
                             append(first)
@@ -78,27 +108,15 @@ fun ConfirmDialog( // TODO: GUHHHHHHHHHHHHHHHHHHHHH
                         )
                     }
                     Spacer(Modifier.weight(1f, true))
-                    Row {
-                        XManagerButton(
-                            onClick = onCopy,
-                        ) {
-                            Text(
-                                text = "COPY URL",
-                                style = Typography.labelSmall,
-                                color = Color(0xFF1DB954),
-                            )
-                        }
-                        Spacer(Modifier.width(2.dp))
-                        XManagerButton(
-                            onClick = onDownload,
-                        ) {
-                            Text(
-                                modifier = Modifier.padding(6.dp),
-                                text = "DOWNLOAD",
-                                style = Typography.labelSmall,
-                                color = Color(0xFF1DB954),
-                            )
-                        }
+                    XManagerButton(
+                        onClick = onDownload,
+                    ) {
+                        Text(
+                            modifier = Modifier.padding(6.dp),
+                            text = "DOWNLOAD",
+                            style = Typography.labelSmall,
+                            color = Color(0xFF1DB954),
+                        )
                     }
                 }
             }
@@ -110,7 +128,6 @@ fun ConfirmDialog( // TODO: GUHHHHHHHHHHHHHHHHHHHHH
 fun DownloadingDialog(
     onDismiss: () -> Unit,
     onFixer: () -> Unit,
-    onCancel: () -> Unit,
     progress: Float,
     downloaded: Double,
     total: Double,
@@ -175,7 +192,7 @@ fun DownloadingDialog(
                     }
                     Spacer(Modifier.weight(1f, true))
                     OutlinedButton(
-                        onClick = onCancel,
+                        onClick = onDismiss,
                         shape = RoundedCornerShape(6.dp),
                         border = BorderStroke(width = 1.5.dp, color = Color(0xFF303030)),
                         contentPadding = PaddingValues(18.dp, 4.dp)

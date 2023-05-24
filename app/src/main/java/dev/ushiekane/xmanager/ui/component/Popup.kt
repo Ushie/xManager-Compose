@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import dev.ushiekane.xmanager.ui.theme.Typography
 
 @Composable
@@ -17,9 +18,14 @@ fun Popup(
     onDismiss: () -> Unit,
     onClick: () -> Unit,
     onClickCloned: () -> Unit,
+    onClickLite: () -> Unit,
 ) {
     Dialog(
-        onDismissRequest = onDismiss
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(
+            dismissOnBackPress = true,
+            dismissOnClickOutside = true
+        )
     ) {
         Surface(
             color = Color(0xFF191919),
@@ -41,12 +47,12 @@ fun Popup(
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     OutlinedButton(
-                        onClick = onDismiss,
+                        onClick = onClickLite,
                         shape = RoundedCornerShape(4.dp),
                         border = BorderStroke(width = 1.0.dp, color = Color(0xFF303030))
                     ) {
                         Text(
-                            text = "CLOSE",
+                            text = "LITE",
                             style = Typography.labelSmall,
                             color = Color.White
                         )

@@ -1,6 +1,5 @@
 package dev.ushiekane.xmanager.ui.component
 
-import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
@@ -32,23 +31,6 @@ fun InfoCard(
         Column(
             modifier = Modifier.clickable { expandedState = !expandedState }) {
             Column {
-                Row(
-                    modifier = Modifier.padding(12.dp, 16.dp, 12.dp, 4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "CPU/ARCH",
-                        color = Color(0xff1DB954),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 12.sp,
-                    )
-                    Spacer(Modifier.weight(1f))
-                    Text(
-                        text = Build.SUPPORTED_ABIS.first().uppercase() ,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 12.sp
-                    )
-                }
                 Divider(
                     modifier = Modifier.padding(vertical = 4.dp, horizontal = 16.dp),
                     thickness = 3.dp

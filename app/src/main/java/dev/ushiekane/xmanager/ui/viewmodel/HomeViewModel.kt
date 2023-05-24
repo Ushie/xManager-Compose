@@ -20,10 +20,7 @@ import dev.ushiekane.xmanager.domain.dto.Amoled
 import dev.ushiekane.xmanager.domain.dto.AmoledCloned
 import dev.ushiekane.xmanager.domain.dto.AmoledClonedExperimental
 import dev.ushiekane.xmanager.domain.dto.AmoledExperimental
-import dev.ushiekane.xmanager.domain.dto.AmoledRelease
 import dev.ushiekane.xmanager.domain.dto.Changelogs
-import dev.ushiekane.xmanager.domain.dto.ClonedRelease
-import dev.ushiekane.xmanager.domain.dto.ExperimentalRelease
 import dev.ushiekane.xmanager.domain.dto.Lite
 import dev.ushiekane.xmanager.domain.dto.Release
 import dev.ushiekane.xmanager.domain.dto.Stock
@@ -32,6 +29,7 @@ import dev.ushiekane.xmanager.domain.dto.StockClonedExperimental
 import dev.ushiekane.xmanager.domain.dto.StockExperimental
 import dev.ushiekane.xmanager.domain.manager.DownloadManager
 import dev.ushiekane.xmanager.domain.repository.GithubRepository
+import dev.ushiekane.xmanager.installer.utils.install
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -40,7 +38,6 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.math.RoundingMode
 import java.text.DecimalFormat
-import java.util.StringJoiner
 import kotlin.math.roundToInt
 
 class HomeViewModel(
@@ -59,6 +56,7 @@ class HomeViewModel(
 
     val liteReleases = mutableStateListOf<Lite>()
     val changeLog = mutableStateListOf<Changelogs>()
+
     var status by mutableStateOf<Status>(Status.Idle)
         private set
 
@@ -69,16 +67,15 @@ class HomeViewModel(
         private set
     var percentage by mutableStateOf(0)
         private set
-    var selectedRelease by mutableStateOf<Release?>(null)
-        private set
 
     private val xManagerDirectory: File =
         Environment.getExternalStoragePublicDirectory("XManager").also { it.mkdirs() }
+
     private var downloadJob: Job? = null
 
+    var selectedRelease by mutableStateOf<Release?>(null)
+        private set
 
-    var isCloned = false
-    var isExperimental = false
     init {
         viewModelScope.launch {
             loadReleases()
@@ -87,9 +84,10 @@ class HomeViewModel(
 
     sealed interface Status {
         object Downloading : Status
-        object Successful : Status
+        class Successful(val file: File) : Status
         object Confirm : Status
-        object Existing : Status
+
+        // object Existing : Status
         object Idle : Status
     }
     private suspend fun loadReleases() = withContext(Dispatchers.IO) {
@@ -115,50 +113,39 @@ class HomeViewModel(
     }
 
     fun delete() {
-        xManagerDirectory.listFiles()
-            ?.filterNot { it.isDirectory }
-            ?.forEach { it.delete() }
-    }
-
-    fun checkIfExists(release: Release) {
-        selectedRelease = release
-        val exists = xManagerDirectory.listFiles { f -> f.isFile }
-            ?.any { it.name.contains(release.version) }
-        if (exists == true) {
-            startDownload()
-        }
+        xManagerDirectory.deleteRecursively()
     }
 
 
-    fun startDownload() {
-        downloadJob = viewModelScope.launch(Dispatchers.Main) {
-            val url = selectedRelease!!.downloadUrl
-            val fileName = StringJoiner(" ")
-                .add("${selectedRelease!!.version} ")
-                .add(if (selectedRelease is AmoledRelease) "Amoled" else "")
-                .add(if (selectedRelease is ClonedRelease) "Cloned" else "")
-                .add(if (selectedRelease is ExperimentalRelease) "Experimental" else "")
-                .toString().plus(".apk")
-
-            withContext(Dispatchers.IO) {
-                downloadManager.download(url, xManagerDirectory.resolve(fileName), progressFlow)
-            }
-
+    fun startDownload(release: Release) = viewModelScope.launch(Dispatchers.Main) {
             status = Status.Downloading
-            progressFlow.collect {
-                if (it != null) {
-                    downloaded = convert(it.first.toDouble().div(1024 * 1024))
-                    total = convert(it.second.toDouble().div(1024 * 1024))
-                    percentage = convert((it.first.toDouble() / it.second.toDouble() * 100)).roundToInt()
 
-                }
+            val urls = mutableListOf(release.downloadUrl, release.downloadUrl2, release.downloadUrl3)
+
+            val collector = viewModelScope.launch(Dispatchers.IO) {
+                progressFlow
+                    .collect { pair ->
+                        if (pair == null) return@collect
+                        downloaded = convert(pair.first.toDouble().div(1024 * 1024))
+                        total = convert(pair.second.toDouble().div(1024 * 1024))
+                        percentage = convert((pair.first.toDouble() / pair.second.toDouble() * 100)).roundToInt()
+                    }
             }
-        }
-    }
 
-    fun installApk() {
-        // app.install(file)
-    } // TODO: FIXXXXXXX
+            val file = withContext(Dispatchers.IO) {
+                downloadManager.downloadApk(urls, xManagerDirectory, progressFlow)
+            }
+
+            status = Status.Successful(file)
+            collector.cancel()
+            downloaded = 0.0
+            total = 0.0
+            percentage = 0
+        }
+
+    fun installApk(file: File) {
+        app.install(file)
+    }
     
     fun copyToClipboard(release: Release) {
         val clipboard = app.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -187,13 +174,19 @@ class HomeViewModel(
         })
     }
 
-    fun fixer() {
-        copyToClipboard(selectedRelease!!)
-        openDownloadLink(selectedRelease!!.downloadUrl)
+    fun fixer(release: Release) {
+        copyToClipboard(release)
+        openDownloadLink(release.downloadUrl)
     }
 
-    fun cancel() {
+    fun dismissDialogAndCancel() {
         downloadJob?.cancel()
+        selectedRelease = null
+        status = Status.Idle
+    }
+    fun confirmDialog(release: Release) {
+        selectedRelease = release
+        status = Status.Confirm
     }
 
     private fun convert(int: Double): Double {
