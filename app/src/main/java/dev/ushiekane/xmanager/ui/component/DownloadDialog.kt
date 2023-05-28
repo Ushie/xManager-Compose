@@ -43,7 +43,7 @@ import dev.ushiekane.xmanager.ui.theme.Typography
 @Composable
 fun ConfirmDialog(
     onDismiss: () -> Unit,
-    onDownload: () -> Unit,
+    onDownload: (Release) -> Unit,
     release: Release
 ) {
     val type =
@@ -109,7 +109,7 @@ fun ConfirmDialog(
                     }
                     Spacer(Modifier.weight(1f, true))
                     XManagerButton(
-                        onClick = onDownload,
+                        onClick = { onDownload(release) },
                     ) {
                         Text(
                             modifier = Modifier.padding(6.dp),
@@ -126,10 +126,10 @@ fun ConfirmDialog(
 
 @Composable
 fun DownloadingDialog(
+    release: Release,
     onDismiss: () -> Unit,
-    onFixer: () -> Unit,
+    onCopy: (String) -> Unit,
     progress: Float,
-    downloaded: Double,
     total: Double,
     percentage: Int,
 ) {
@@ -167,7 +167,7 @@ fun DownloadingDialog(
                             )
                             Spacer(Modifier.weight(1f, true))
                             Text(
-                                text = "$downloaded MB | $total MB"
+                                text = "${release.version} | $total MB"
                             )
                         }
                     }
@@ -179,15 +179,15 @@ fun DownloadingDialog(
                         .padding(8.dp),
                 ) {
                     Button(
-                        onClick = onFixer,
+                        onClick = { onCopy(release.downloadUrl) },
                         shape = RoundedCornerShape(6.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF252525)),
                         contentPadding = PaddingValues(18.dp, 4.dp)
                     ) {
                         Text(
-                            text = "FIXER",
+                            text = "MIRROR LINK",
                             style = Typography.labelSmall,
-                            color = Color.Yellow,
+                            color = Color.White,
                         )
                     }
                     Spacer(Modifier.weight(1f, true))

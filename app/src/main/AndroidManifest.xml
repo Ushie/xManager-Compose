@@ -24,7 +24,7 @@
     </queries>
 
     <application
-        android:name=".Application"
+        android:name=".XManager"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

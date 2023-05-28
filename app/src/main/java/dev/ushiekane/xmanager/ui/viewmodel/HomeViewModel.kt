@@ -30,20 +30,20 @@ import dev.ushiekane.xmanager.domain.dto.StockExperimental
 import dev.ushiekane.xmanager.domain.manager.DownloadManager
 import dev.ushiekane.xmanager.domain.repository.GithubRepository
 import dev.ushiekane.xmanager.installer.utils.install
+import dev.ushiekane.xmanager.preferences.PreferencesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.math.RoundingMode
-import java.text.DecimalFormat
-import kotlin.math.roundToInt
 
 class HomeViewModel(
     private val app: Application,
     private val repository: GithubRepository,
     private val downloadManager: DownloadManager,
+    val prefs: PreferencesManager,
 ) : ViewModel() {
     val stockReleases = mutableStateListOf<Stock>()
     val amoledReleases = mutableStateListOf<Amoled>()
@@ -60,9 +60,7 @@ class HomeViewModel(
     var status by mutableStateOf<Status>(Status.Idle)
         private set
 
-    private var progressFlow = MutableSharedFlow<Pair<Int, Int>?>()
-    var downloaded by mutableStateOf(0.0)
-        private set
+    private var progressFlow = MutableSharedFlow<Pair<Int, Double>?>()
     var total by mutableStateOf(0.0)
         private set
     var percentage by mutableStateOf(0)
@@ -73,9 +71,6 @@ class HomeViewModel(
 
     private var downloadJob: Job? = null
 
-    var selectedRelease by mutableStateOf<Release?>(null)
-        private set
-
     init {
         viewModelScope.launch {
             loadReleases()
@@ -83,13 +78,14 @@ class HomeViewModel(
     }
 
     sealed interface Status {
-        object Downloading : Status
+        class Downloading(val release: Release) : Status
         class Successful(val file: File) : Status
-        object Confirm : Status
+        class Confirm(val release: Release) : Status
 
         // object Existing : Status
         object Idle : Status
     }
+
     private suspend fun loadReleases() = withContext(Dispatchers.IO) {
         val releases = repository.fetchReleases()
 
@@ -117,41 +113,39 @@ class HomeViewModel(
     }
 
 
-    fun startDownload(release: Release) = viewModelScope.launch(Dispatchers.Main) {
-            status = Status.Downloading
+    fun startDownload(release: Release) {
+        viewModelScope.coroutineContext.cancelChildren()
 
-            val urls = mutableListOf(release.downloadUrl, release.downloadUrl2, release.downloadUrl3)
+        downloadJob = viewModelScope.launch(Dispatchers.Main) {
+            status = Status.Downloading(release)
 
-            val collector = viewModelScope.launch(Dispatchers.IO) {
+            val urls =
+                mutableListOf(release.downloadUrl, release.downloadUrl2, release.downloadUrl3)
+
+            viewModelScope.launch(Dispatchers.IO) {
                 progressFlow
                     .collect { pair ->
                         if (pair == null) return@collect
-                        downloaded = convert(pair.first.toDouble().div(1024 * 1024))
-                        total = convert(pair.second.toDouble().div(1024 * 1024))
-                        percentage = convert((pair.first.toDouble() / pair.second.toDouble() * 100)).roundToInt()
+                        percentage = pair.first
+                        total = pair.second
                     }
             }
 
-            val file = withContext(Dispatchers.IO) {
-                downloadManager.downloadApk(urls, xManagerDirectory, progressFlow)
-            }
-
+            val file = downloadManager.downloadApk(urls, xManagerDirectory)
             status = Status.Successful(file)
-            collector.cancel()
-            downloaded = 0.0
-            total = 0.0
-            percentage = 0
+
         }
+    }
 
     fun installApk(file: File) {
         app.install(file)
     }
-    
-    fun copyToClipboard(release: Release) {
+
+    fun copyToClipboard(url: String) {
         val clipboard = app.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(
             ClipData.newPlainText(
-                BuildConfig.APPLICATION_ID, release.downloadUrl
+                BuildConfig.APPLICATION_ID, url
             )
         )
     }
@@ -174,24 +168,14 @@ class HomeViewModel(
         })
     }
 
-    fun fixer(release: Release) {
-        copyToClipboard(release)
-        openDownloadLink(release.downloadUrl)
-    }
-
     fun dismissDialogAndCancel() {
+        total = 0.0
+        percentage = 0
         downloadJob?.cancel()
-        selectedRelease = null
         status = Status.Idle
     }
-    fun confirmDialog(release: Release) {
-        selectedRelease = release
-        status = Status.Confirm
-    }
 
-    private fun convert(int: Double): Double {
-        val df = DecimalFormat("##.##")
-        df.roundingMode = RoundingMode.CEILING
-        return df.format(int).toDouble()
+    fun confirmDialog(release: Release) {
+        status = Status.Confirm(release)
     }
 }

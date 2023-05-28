@@ -5,12 +5,12 @@ import dev.ushiekane.xmanager.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class Application : Application() {
+class XManager : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            androidContext(this@Application)
-            modules(httpModule, viewModelModule, repositoryModule)
+            androidContext(this@XManager)
+            modules(httpModule, viewModelModule, repositoryModule, preferenceModule)
         }
     }
 }

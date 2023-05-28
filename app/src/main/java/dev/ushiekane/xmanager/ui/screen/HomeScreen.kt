@@ -40,10 +40,10 @@ fun HomeScreen(
         when (vm.status) {
             is Status.Downloading -> {
                 DownloadingDialog(
+                    release = (vm.status as Status.Downloading).release,
                     onDismiss = vm::dismissDialogAndCancel,
-                    onFixer = { vm.fixer(vm.selectedRelease!!) },
-                    progress = vm.percentage.toDouble().div(100).toFloat(),
-                    downloaded = vm.downloaded,
+                    onCopy = { vm.copyToClipboard(it) },
+                    progress = vm.percentage.toFloat().div(100),
                     total = vm.total,
                     percentage = vm.percentage,
                 )
@@ -57,10 +57,11 @@ fun HomeScreen(
             }
 
             is Status.Confirm -> {
+                val release = (vm.status as Status.Confirm).release
                 ConfirmDialog(
                     onDismiss = vm::dismissDialogAndCancel,
-                    onDownload = { vm.startDownload(vm.selectedRelease!!) },
-                    release = vm.selectedRelease!!
+                    onDownload = { vm.startDownload(it) },
+                    release = release
                 )
             }
             // is Status.Existing -> {
@@ -77,11 +78,9 @@ fun HomeScreen(
                 .padding(paddingValues)
                 .padding(8.dp, 18.dp, 8.dp, 8.dp)
         ) {
-            val isCloned = false
-            val isExperimental = false
             arrayOf(
                 when {
-                    isCloned && isExperimental -> {
+                    vm.prefs.cloned && vm.prefs.experimental -> {
                         Triple(
                             "SE CLONED PATCHED",
                             "Experimental cloned. Unstable",
@@ -94,7 +93,7 @@ fun HomeScreen(
                         )
                     }
 
-                    isCloned -> {
+                    vm.prefs.cloned -> {
                         Triple(
                             "STOCK CLONED PATCHED",
                             "A cloned version of the stock patched",
@@ -107,7 +106,7 @@ fun HomeScreen(
                         )
                     }
 
-                    isExperimental -> {
+                    vm.prefs.experimental -> {
                         Triple(
                             "STOCK EXP PATCHED",
                             "Experimental. New features. Unstable.",
