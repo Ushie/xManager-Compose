@@ -1,6 +1,6 @@
 package dev.ushiekane.xmanager.ui.navigation
 
-import com.xinto.taxi.Destination
+import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
