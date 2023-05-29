@@ -4,7 +4,7 @@ import com.xinto.taxi.Destination
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-sealed interface AppDestination : Destination {
+sealed interface AppDestination: Parcelable {
     @Parcelize
     object Home : AppDestination
 
