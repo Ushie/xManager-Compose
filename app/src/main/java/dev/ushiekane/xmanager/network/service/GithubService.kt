@@ -1,6 +1,6 @@
 package dev.ushiekane.xmanager.network.service
 
-import dev.ushiekane.xmanager.domain.dto.Release
+import dev.ushiekane.xmanager.BuildConfig
 import dev.ushiekane.xmanager.domain.dto.Response
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -17,6 +17,6 @@ class GithubService(private val client: HttpClient) {
 
     private companion object {
         private const val apiUrl =
-            "The API link is currently closed sourced. Will add once API implementation is fixed."
+            BuildConfig.API_URL
     }
 }
